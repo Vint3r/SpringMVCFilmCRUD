@@ -1,5 +1,7 @@
 package com.skilldistillery.film.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,5 +49,14 @@ public class FilmController {
 		return mv;
 	}
 	
+	@RequestMapping(path="searchkw.do", params="keyword", method=RequestMethod.GET)
+	public ModelAndView goToSearchByKW(Film film) {
+		ModelAndView mv = new ModelAndView();
+		String key = film.getKeyword();
+		List<Film> films = dao.findFilmByWord(key);
+		mv.addObject("films", films);
+		mv.setViewName("WEB-INF/displayfullinfo.jsp");
+		return mv;
+	}
 
 }
