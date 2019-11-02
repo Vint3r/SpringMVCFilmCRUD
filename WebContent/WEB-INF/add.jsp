@@ -43,9 +43,11 @@
 		<form:input path="replaceCost" />
 		<form:errors path="replaceCost" />
 		<br />
-		<form:label path="rating">Rating(String):</form:label>
-		<form:input path="rating" />
-		<form:errors path="rating" />
+		<form:radiobutton path="rating" value="G"/>G 
+		<form:radiobutton path="rating" value="PG"/>PG 
+		<form:radiobutton path="rating" value="PG-13"/>PG-13
+		<form:radiobutton path="rating" value="R"/>R
+		<form:radiobutton path="rating" value="NC-17"/>NC-17 
 		<br />
 		<form:label path="specialFeat">Special Features(String):</form:label>
 		<form:input path="specialFeat" />
