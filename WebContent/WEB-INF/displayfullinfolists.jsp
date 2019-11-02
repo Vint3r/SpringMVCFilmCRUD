@@ -76,6 +76,10 @@
 
 		<a href="index.html" class="btn btn-secondary" role="button">Back
 			to Home</a>
+			<br />
+			<form action="delete.do" method="GET">
+		<input type="submit" value="Delete Button" />
+	</form>
 	</p>
 	</div>
 </body>
