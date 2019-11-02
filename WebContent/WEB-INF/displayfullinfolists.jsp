@@ -80,6 +80,9 @@
 			<form action="delete.do" method="GET">
 		<input type="submit" value="Delete Button" />
 	</form>
+	<form action="update.do" method="GET">
+		<input type="submit" value="update.do Button" />
+	</form>
 	</p>
 	</div>
 </body>

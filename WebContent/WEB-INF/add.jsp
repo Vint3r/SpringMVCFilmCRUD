@@ -66,5 +66,7 @@
 		</tr>
 		</table>
 	</form:form>
+	<a href="index.html" class="btn btn-secondary" role="button">Back
+			to Home</a>
 </body>
 </html>
