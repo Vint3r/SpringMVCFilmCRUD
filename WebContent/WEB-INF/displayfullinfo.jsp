@@ -53,10 +53,11 @@
 	</table>
 		<div class="container">
 			<table>
-				<c:forEach var="actor" items="${actorList}">
+				<c:forEach var="actor" items="${film.actors}">
 					<tr>
 						<td>Film Actor</td>
-						<td>${film.actor }</td>
+						<td>${actor.firstName }</td>
+						<td>${actor.lastName }</td>
 					</tr>
 				</c:forEach>
 
