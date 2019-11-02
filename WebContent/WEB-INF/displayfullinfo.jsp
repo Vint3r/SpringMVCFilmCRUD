@@ -76,7 +76,10 @@
 			to Home</a>
 			<br />
 				<form action="delete.do" method="GET">
-		<input type="submit" value="Delete Button" />
+		<input type="submit" value="delete.do Button" />
+	</form>
+	<form action="update.do" method="GET">
+		<input type="submit" value="update.do Button" />
 	</form>
 	</p>
 	</div>
