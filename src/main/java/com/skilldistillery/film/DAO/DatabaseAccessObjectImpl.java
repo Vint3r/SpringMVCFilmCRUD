@@ -50,7 +50,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				filmWanted.setTitle(rs.getString("title"));
 				filmWanted.setDescription(rs.getString("description"));
 				filmWanted.setReleaseYear(rs.getInt("release_year"));
-				filmWanted.setLanguage(rs.getString("name"));
+				filmWanted.setLanguage(rs.getInt("name"));
 				filmWanted.setRentDuration(rs.getInt("rental_duration"));
 				filmWanted.setRentRate(rs.getDouble("rental_rate"));
 				filmWanted.setLength(rs.getInt("length"));
@@ -142,7 +142,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				filmWanted.setTitle(rs.getString("title"));
 				filmWanted.setDescription(rs.getString("description"));
 				filmWanted.setReleaseYear(rs.getInt("release_year"));
-				filmWanted.setLanguage(rs.getString("name"));
+				filmWanted.setLanguage(rs.getInt("name"));
 				filmWanted.setRentDuration(rs.getInt("rental_duration"));
 				filmWanted.setRentRate(rs.getDouble("rental_rate"));
 				filmWanted.setLength(rs.getInt("length"));
@@ -190,14 +190,14 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			conn = DriverManager.getConnection(URL, user, password);
 			conn.setAutoCommit(false);
 
-			String sqlLang = "SELECT language.id FROM language "
-					+ "join film on film.language_id = language.id where language.name like ?";
-			PreparedStatement psLang = conn.prepareStatement(sqlLang);
-			psLang.setString(1, "%" + film.getLanguage() + "%");
-			ResultSet rs = psLang.executeQuery();
-			if (rs.next()) {
-				languageId = rs.getInt("id");
-			}
+//			String sqlLang = "SELECT language.id FROM language "
+//					+ "join film on film.language_id = language.id where language.name = ?";
+//			PreparedStatement psLang = conn.prepareStatement(sqlLang);
+//			psLang.setInt(1, film.getLanguage());
+//			ResultSet rs = psLang.executeQuery();
+//			if (rs.next()) {
+//				languageId = rs.getInt("id");
+//			}
 
 			String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, "
 					+ "replacement_cost, rating, special_features) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -214,14 +214,14 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			ps.setString(10, film.getSpecialFeat());
 
 			int rowsChanged = ps.executeUpdate();
-			rs = ps.getGeneratedKeys();
+			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {
 				film.setId(rs.getInt(1));
 				System.out.println(rowsChanged + " movies added to the data base.");
 				System.out.println("Film id is " + film.getId());
 			}
 			conn.commit();
-			psLang.close();
+//			psLang.close();
 			ps.close();
 			rs.close();
 			conn.close();
