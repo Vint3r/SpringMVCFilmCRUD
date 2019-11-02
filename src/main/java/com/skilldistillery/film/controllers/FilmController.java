@@ -36,6 +36,14 @@ public class FilmController {
 		mv.setViewName("WEB-INF/add.jsp");
 		return mv;
 	}
-	
-	
+
+	@RequestMapping(path="displayfullinfo.do", method=RequestMethod.GET)
+	public ModelAndView goToResults() {
+		ModelAndView mv = new ModelAndView();
+		Film film = new Film();
+		mv.addObject("film", film);
+		mv.setViewName("WEB-INF/displayfullinfo.jsp");
+		return mv;
+	}
+
 }
