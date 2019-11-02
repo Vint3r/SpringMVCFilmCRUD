@@ -55,8 +55,24 @@ public class FilmController {
 		String key = film.getKeyword();
 		List<Film> films = dao.findFilmByWord(key);
 		mv.addObject("films", films);
+		mv.setViewName("WEB-INF/displayfullinfolists.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path="addFilm.do",
+			params= {"title", "description", "releaseYear", "language", "rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat"},
+			method=RequestMethod.GET)
+	public ModelAndView addFilm(Film film) {
+		ModelAndView mv = new ModelAndView();
+		dao.createFilm(film);
+//		if (film.getId() == 0) {
+//			mv.setViewName("WEB-INF/add.jsp");
+//			return mv;
+//		}
+		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
+		
 	}
 
 }
