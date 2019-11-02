@@ -6,14 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.skilldistillery.film.DAO.DatabaseAccessObjectInterface;
+import com.skilldistillery.film.DAO.DatabaseAccessObjectImpl;
 import com.skilldistillery.film.entities.Film;
 
 @Controller
 public class FilmController {
 
 	@Autowired
-	private DatabaseAccessObjectInterface dao;
+	private DatabaseAccessObjectImpl dao;
+	
+	public void setDatabaseAccessorObjectImpl(DatabaseAccessObjectImpl dao) {
+		this.dao = dao;
+	}
 	
 	@RequestMapping(path="search.do", method=RequestMethod.GET)
 	public ModelAndView goToSearch() {
