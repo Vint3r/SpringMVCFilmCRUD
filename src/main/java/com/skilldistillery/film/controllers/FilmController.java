@@ -37,10 +37,11 @@ public class FilmController {
 		return mv;
 	}
 
-	@RequestMapping(path="displayfullinfo.do", method=RequestMethod.GET)
-	public ModelAndView goToResults() {
+	@RequestMapping(path="searchid.do", params="id", method=RequestMethod.POST)
+	public ModelAndView goToResults(Film film) {
 		ModelAndView mv = new ModelAndView();
-		Film film = new Film();
+		int filmId = film.getId();
+		film = dao.findFilmById(filmId);
 		mv.addObject("film", film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;

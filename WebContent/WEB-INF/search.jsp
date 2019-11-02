@@ -9,14 +9,14 @@
 <title>Search</title>
 </head>
 <body>
-	<form:form action="displayfullinfo.do" method="GET" modelAttribute="film">
+	<form:form action="searchkw.do" method="POST" modelAttribute="film">
 		<form:label path="keyword">Keyword:</form:label>
 		<form:input path="keyword" />
 		<form:errors path="keyword" />
 		<input type="submit" value="Search Keyword" />
 		</form:form>
 		<br />
-			<form:form action="displayfullinfo.do" method="GET" modelAttribute="film">
+			<form:form action="searchid.do" method="POST" modelAttribute="film">
 		<form:label path="id">ID:</form:label>
 		<form:input path="id" />
 		<form:errors path="id" />
