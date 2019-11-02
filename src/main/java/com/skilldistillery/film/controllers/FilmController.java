@@ -27,4 +27,13 @@ public class FilmController {
 		mv.setViewName("WEB-INF/search.jsp");
 		return mv;
 	}
+	
+	@RequestMapping(path="add.do", method=RequestMethod.GET)
+	public ModelAndView goToAdd() {
+		ModelAndView mv = new ModelAndView();
+		Film film = new Film();
+		mv.addObject("film", film);
+		mv.setViewName("WEB-INF/add.jsp");
+		return mv;
+	}
 }
