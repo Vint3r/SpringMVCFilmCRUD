@@ -70,7 +70,7 @@
 			<a href="index.html" class="btn btn-secondary" role="button">Back
 				to Home</a> <br>
 			<form:form action="delete.do" method="GET" modelAttribute="film">
-				<form:label path="id", type="HIDDEN">ID:</form:label>
+				<form:label path="id">ID:</form:label>
 				<form:input path="id" />
 				<form:errors path="id" />
 				<input type="submit" value="Delete ID" />
