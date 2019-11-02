@@ -10,14 +10,14 @@
 </head>
 <body>
 	<form:form action="login.do" method="POST" modelAttribute="film">
-		<form:label path="keyword">Keyword:</form:label>
+		<form:label path="keyword">Stuff:</form:label>
 		<form:input path="keyword" />
 		<form:errors path="keyword" />
 		<input type="submit" value="Search Keyword" />
 		</form:form>
 		<br />
 			<form:form action="login.do" method="POST" modelAttribute="film">
-		<form:label path="id">ID:</form:label>
+		<form:label path="id">Hate:</form:label>
 		<form:input path="id" />
 		<form:errors path="id" />
 		<input type="submit" value="Search Id" />
