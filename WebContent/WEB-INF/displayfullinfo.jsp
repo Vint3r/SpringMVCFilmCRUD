@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,18 +67,17 @@
 			</c:forEach>
 
 		</table>
-		<p>
-
 			<a href="index.html" class="btn btn-secondary" role="button">Back
-				to Home</a> <br />
-		<form action="delete.do" method="GET">
-			<input type="submit" value="delete.do Button" />
-		</form>
+				to Home</a> <br>
+			<form:form action="delete.do" method="GET" modelAttribute="film">
+				<form:label path="id", type="HIDDEN">ID:</form:label>
+				<form:input path="id" />
+				<form:errors path="id" />
+				<input type="submit" value="Delete ID" />
+			</form:form>
 		<form action="update.do" method="GET">
 			<input type="submit" value="update.do Button" />
 		</form>
-		</p>
-
 	</div>
 </body>
 </html>

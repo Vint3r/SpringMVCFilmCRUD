@@ -71,15 +71,14 @@ public class FilmController {
 
 	}
 
-	@RequestMapping(path = "delete.do", params = { "title", "description", "releaseYear", "language", "rentDuration",
-			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category" }, method = RequestMethod.GET)
+	@RequestMapping(path = "delete.do", params = "id", method = RequestMethod.GET)
 	public ModelAndView deleteFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
 		if (dao.deleteFilm(film)) {
-			mv.setViewName("WEB-INF/index.html");
+			mv.setViewName("index.html");
 			return mv;
 		} 
-		mv.setViewName("WEB-INF/index.html");
+		mv.setViewName("index.html");
 		return mv;
 //		else {
 //			mv.setViewName("WEB-INF/displayfullinfo.jsp");
