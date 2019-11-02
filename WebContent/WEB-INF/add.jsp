@@ -28,6 +28,11 @@
 		<form:errors path="releaseYear" /></td>
 		</tr>
 		<tr>
+		<td><form:label path="language">Language(String):</form:label></td>
+		<td><form:input path="language" />
+		<form:errors path="language" /></td>
+		</tr>
+		<tr>
 		<td><form:label path="rentDuration">Rent Duration(Integer):</form:label></td>
 		<td><form:input path="rentDuration" />
 		<form:errors path="rentDuration" /></td>

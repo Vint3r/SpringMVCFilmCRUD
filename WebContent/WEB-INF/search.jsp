@@ -26,7 +26,7 @@
 		<form:label path="id">ID:</form:label>
 		<form:input path="id" />
 		<form:errors path="id" />
-		<input type="submit" value="Delete ID" />
+		<input type="submit" value="Delete ID"  />
 	</form:form>
 	<br />
 </body>
