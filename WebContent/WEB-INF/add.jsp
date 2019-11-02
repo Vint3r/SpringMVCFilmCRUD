@@ -43,6 +43,10 @@
 		<form:input path="replaceCost" />
 		<form:errors path="replaceCost" />
 		<br />
+		<form:label path="category">category(String):</form:label>
+		<form:input path="category" />
+		<form:errors path="category" />
+		<br />
 		<form:label path="rating">Rating:</form:label>
 		<form:radiobutton path="rating" value="G"/>G 
 		<form:radiobutton path="rating" value="PG"/>PG 

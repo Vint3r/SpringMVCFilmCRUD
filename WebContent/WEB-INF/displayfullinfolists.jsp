@@ -24,6 +24,10 @@
 				<td>${film.releaseYear}</td>
 			</tr>
 			<tr>
+				<td>Film Category</td>
+				<td>${film.category}</td>
+			</tr>
+			<tr>
 				<td>Film Language</td>
 				<td>${film.language}</td>
 			</tr>

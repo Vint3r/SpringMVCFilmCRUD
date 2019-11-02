@@ -50,11 +50,12 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				filmWanted.setTitle(rs.getString("title"));
 				filmWanted.setDescription(rs.getString("description"));
 				filmWanted.setReleaseYear(rs.getInt("release_year"));
-				filmWanted.setLanguage(rs.getString("name"));
+				filmWanted.setLanguage(rs.getString("language.name"));
 				filmWanted.setRentDuration(rs.getInt("rental_duration"));
 				filmWanted.setRentRate(rs.getDouble("rental_rate"));
 				filmWanted.setLength(rs.getInt("length"));
 				filmWanted.setReplaceCost(rs.getDouble("replacement_cost"));
+				filmWanted.setCategory("category.name");
 				filmWanted.setRating(rs.getString("rating"));
 				filmWanted.setSpecialFeat(rs.getString("special_features"));
 				filmWanted.setActors(findActorsByFilmId(filmId));
@@ -142,13 +143,14 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				filmWanted.setTitle(rs.getString("title"));
 				filmWanted.setDescription(rs.getString("description"));
 				filmWanted.setReleaseYear(rs.getInt("release_year"));
-				filmWanted.setLanguage(rs.getString("name"));
+				filmWanted.setLanguage(rs.getString("language.name"));
 				filmWanted.setRentDuration(rs.getInt("rental_duration"));
 				filmWanted.setRentRate(rs.getDouble("rental_rate"));
 				filmWanted.setLength(rs.getInt("length"));
 				filmWanted.setReplaceCost(rs.getDouble("replacement_cost"));
 				filmWanted.setRating(rs.getString("rating"));
 				filmWanted.setSpecialFeat(rs.getString("special_features"));
+				filmWanted.setCategory("category.name");
 				filmWanted.setActors(findActorsByFilmId(filmWanted.getId()));
 				filmsWanted.add(filmWanted);
 				filmWanted = null;
@@ -198,7 +200,16 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			if (rs.next()) {
 				languageId = rs.getInt("id");
 			}
-
+			
+			String sqlCat = "SELECT category.id from category join film_category on film_category.category_id = category.id where category.name like ?";
+			psLang = conn.prepareStatement(sqlCat);
+			int categoryId = 0;
+			psLang.setString(1, "%" + film.getRating() + "%");
+			rs = psLang.executeQuery();
+			if (rs.next()) {
+				categoryId = rs.getInt("id");
+			}
+			
 			String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, "
 					+ "replacement_cost, rating, special_features) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -220,6 +231,16 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				System.out.println(rowsChanged + " movies added to the data base.");
 				System.out.println("Film id is " + film.getId());
 			}
+			
+			String insertCat = "insert into film_category (category_id, film_id) values (?, ?)";
+			ps = conn.prepareStatement(insertCat);
+			ps.setInt(1, categoryId);
+			ps.setInt(2, film.getId());
+			rowsChanged = ps.executeUpdate();
+			if (rs.next()) {
+				System.out.println(rowsChanged + " to the film_category table");
+			}
+			
 			conn.commit();
 			psLang.close();
 			ps.close();

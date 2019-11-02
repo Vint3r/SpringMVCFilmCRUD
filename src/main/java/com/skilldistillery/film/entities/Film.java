@@ -16,20 +16,13 @@ public class Film {
 	private String specialFeat;
 	private List<Actor> actors;
 	private String keyword;
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
+	private String category;
 
 	public Film() {
 	}
-	
-	public Film(String title, String description, Integer releaseYear, String language,
-			Integer rentDuration, Double rentRate, Integer length, Double replaceCost, String rating, String specialFeat) {
+
+	public Film(String title, String description, Integer releaseYear, String language, Integer rentDuration,
+			Double rentRate, Integer length, Double replaceCost, String rating, String specialFeat) {
 		this.title = title;
 		this.description = description;
 		this.releaseYear = releaseYear;
@@ -41,7 +34,22 @@ public class Film {
 		this.rating = rating;
 		this.specialFeat = specialFeat;
 	}
-	
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 	public Integer getId() {
 		return id;
