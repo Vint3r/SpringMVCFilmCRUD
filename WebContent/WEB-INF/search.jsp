@@ -9,7 +9,7 @@
 <title>Search</title>
 </head>
 <body>
-	<form:form action="login.do" method="POST" modelAttribute="film">
+	<form:form action="search.do" method="GET" modelAttribute="film">
 		<form:label path="keyword">Keyword:</form:label>
 		<form:input path="keyword" />
 		<form:errors path="keyword" />

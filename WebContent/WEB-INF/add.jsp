@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Search</title>
+<title>AddFilm</title>
 </head>
 <body>
 <h2>Please enter film details</h2>
