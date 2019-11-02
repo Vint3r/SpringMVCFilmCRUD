@@ -43,6 +43,7 @@
 		<form:input path="replaceCost" />
 		<form:errors path="replaceCost" />
 		<br />
+		<form:label path="rating">Rating:</form:label>
 		<form:radiobutton path="rating" value="G"/>G 
 		<form:radiobutton path="rating" value="PG"/>PG 
 		<form:radiobutton path="rating" value="PG-13"/>PG-13
