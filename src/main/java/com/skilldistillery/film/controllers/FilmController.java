@@ -16,12 +16,12 @@ public class FilmController {
 
 	@Autowired
 	private DatabaseAccessObjectImpl dao;
-	
-	 {
+
+	{
 		dao = new DatabaseAccessObjectImpl();
 	}
-	
-	@RequestMapping(path="search.do", method=RequestMethod.GET)
+
+	@RequestMapping(path = "search.do", method = RequestMethod.GET)
 	public ModelAndView goToSearch() {
 		ModelAndView mv = new ModelAndView();
 		Film film = new Film();
@@ -29,8 +29,8 @@ public class FilmController {
 		mv.setViewName("WEB-INF/search.jsp");
 		return mv;
 	}
-	
-	@RequestMapping(path="add.do", method=RequestMethod.GET)
+
+	@RequestMapping(path = "add.do", method = RequestMethod.GET)
 	public ModelAndView goToAdd() {
 		ModelAndView mv = new ModelAndView();
 		Film film = new Film();
@@ -39,7 +39,7 @@ public class FilmController {
 		return mv;
 	}
 
-	@RequestMapping(path="searchid.do", params="id", method=RequestMethod.GET)
+	@RequestMapping(path = "searchid.do", params = "id", method = RequestMethod.GET)
 	public ModelAndView goToSearchById(Film film) {
 		ModelAndView mv = new ModelAndView();
 		int filmId = film.getId();
@@ -48,8 +48,8 @@ public class FilmController {
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
 	}
-	
-	@RequestMapping(path="searchkw.do", params="keyword", method=RequestMethod.GET)
+
+	@RequestMapping(path = "searchkw.do", params = "keyword", method = RequestMethod.GET)
 	public ModelAndView goToSearchByKW(Film film) {
 		ModelAndView mv = new ModelAndView();
 		String key = film.getKeyword();
@@ -58,10 +58,9 @@ public class FilmController {
 		mv.setViewName("WEB-INF/displayfullinfolists.jsp");
 		return mv;
 	}
-	
-	@RequestMapping(path="addFilm.do",
-			params= {"title", "description", "releaseYear", "language", "rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat", "category"},
-			method=RequestMethod.GET)
+
+	@RequestMapping(path = "addFilm.do", params = { "title", "description", "releaseYear", "language", "rentDuration",
+			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category" }, method = RequestMethod.GET)
 	public ModelAndView addFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
@@ -69,21 +68,22 @@ public class FilmController {
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
-		
+
 	}
-	
-	@RequestMapping(path="delete.do",
-			params= {"title", "description", "releaseYear", "language", "rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat", "category"},
-			method=RequestMethod.GET)
+
+	@RequestMapping(path = "delete.do", params = { "title", "description", "releaseYear", "language", "rentDuration",
+			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category" }, method = RequestMethod.GET)
 	public ModelAndView deleteFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
-		boolean worked = dao.deleteFilm(film);
-		if (worked) {
+		if (dao.deleteFilm(film)) {
 			mv.setViewName("WEB-INF/index.html");
 			return mv;
-		} else {
-			mv.setViewName("WEB-INF/displayfullinfo.jsp");
-			return mv;
-		}
+		} 
+		mv.setViewName("WEB-INF/index.html");
+		return mv;
+//		else {
+//			mv.setViewName("WEB-INF/displayfullinfo.jsp");
+//			return mv;
+//		}
 	}
 }
