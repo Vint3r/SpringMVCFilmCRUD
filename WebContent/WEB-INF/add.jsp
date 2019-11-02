@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Register</title>
+<title>Film Add</title>
 </head>
 <body>
 	<!-- TODO: Add registration form -->
@@ -33,7 +33,7 @@
 		<form:label path="age">Age:</form:label>
 		<form:input path="age" />
 		<form:errors path="age" />
-		<input type="submit" value="Register" />
+		<input type="submit" value="Add Film" />
 	</form:form>
 </body>
 </html>
