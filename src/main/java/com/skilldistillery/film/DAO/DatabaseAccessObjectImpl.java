@@ -15,7 +15,7 @@ import com.skilldistillery.film.entities.Film;
 
 @Component
 public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
-	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
+	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
 	private static final String user = "student";
 	private static final String password = "student";
 
