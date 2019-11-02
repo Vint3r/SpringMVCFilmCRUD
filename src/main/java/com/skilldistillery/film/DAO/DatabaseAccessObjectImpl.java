@@ -55,7 +55,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				filmWanted.setRentRate(rs.getDouble("rental_rate"));
 				filmWanted.setLength(rs.getInt("length"));
 				filmWanted.setReplaceCost(rs.getDouble("replacement_cost"));
-				filmWanted.setCategory("category.name");
+				filmWanted.setCategory(rs.getString("category.name"));
 				filmWanted.setRating(rs.getString("rating"));
 				filmWanted.setSpecialFeat(rs.getString("special_features"));
 				filmWanted.setActors(findActorsByFilmId(filmId));
