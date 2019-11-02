@@ -10,7 +10,7 @@
 </head>
 <body>
 <h2>Please enter film details</h2>
-	<form:form action="add.do" method="GET" modelAttribute="film">
+	<form:form action="displayfullinfo.do" method="GET" modelAttribute="film">
 		<form:label path="title">Title(String):</form:label>
 		<form:input path="title" />
 		<form:errors path="title" />
