@@ -274,12 +274,18 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 			String sql = "DELETE FROM film_actor WHERE film_id = ?";
 			String sql2 = "DELETE FROM film WHERE id = ?";
+			String sql3 = "DELETE FROM film_category WHERE film_id = ?";
 			int filmId = film.getId();
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, filmId);
 			int rowsChanged = ps.executeUpdate();
 			System.out.println(rowsChanged + " rows deleted from the Film_Actor data base.");
+			
+			ps = conn.prepareStatement(sql3);
+			ps.setInt(1, filmId);
+			rowsChanged = ps.executeUpdate();
+			System.out.println(rowsChanged + " rows deleted from the Film_category table.");
 
 			ps = conn.prepareStatement(sql2);
 			ps.setInt(1, filmId);

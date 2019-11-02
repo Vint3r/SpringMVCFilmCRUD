@@ -66,10 +66,6 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
 		dao.createFilm(film);
-//		if (film.getId() == 0) {
-//			mv.setViewName("WEB-INF/add.jsp");
-//			return mv;
-//		}
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
@@ -77,7 +73,7 @@ public class FilmController {
 	}
 	
 	@RequestMapping(path="delete.do",
-			params= {"title", "description", "releaseYear", "language", "rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat"},
+			params= {"title", "description", "releaseYear", "language", "rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat", "category"},
 			method=RequestMethod.GET)
 	public ModelAndView deleteFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
