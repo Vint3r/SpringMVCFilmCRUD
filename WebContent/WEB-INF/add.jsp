@@ -47,17 +47,24 @@
 		<form:input path="category" />
 		<form:errors path="category" />
 		<br />
-		<form:label path="rating">Rating:</form:label>
-		<form:radiobutton path="rating" value="G"/>G 
+		<td><form:label path="rating">Rating:</form:label></td>
+		<tr>
+		<td><form:radiobutton path="rating" value="G"/>G 
 		<form:radiobutton path="rating" value="PG"/>PG 
 		<form:radiobutton path="rating" value="PG-13"/>PG-13
 		<form:radiobutton path="rating" value="R"/>R
-		<form:radiobutton path="rating" value="NC-17"/>NC-17 
-		<br />
-		<form:label path="specialFeat">Special Features(String):</form:label>
-		<form:input path="specialFeat" />
-		<form:errors path="specialFeat" />
-		<input type="submit" value="Add Film" />
+		<form:radiobutton path="rating" value="NC-17"/>NC-17</td> 
+		</tr>
+		<table>
+		<tr>
+		<td><form:label path="specialFeat">Special Features(String):</form:label></td>
+		<td><form:input path="specialFeat" />
+		<form:errors path="specialFeat" /></td>
+		</tr>
+		<tr>
+		<td><input type="submit" value="Add Film" /></td>
+		</tr>
+		</table>
 	</form:form>
 </body>
 </html>

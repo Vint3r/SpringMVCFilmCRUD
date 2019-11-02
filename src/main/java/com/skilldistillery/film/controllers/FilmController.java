@@ -61,9 +61,10 @@ public class FilmController {
 	
 	@RequestMapping(path="addFilm.do",
 			params= {"title", "description", "releaseYear", "language", "rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat"},
-			method=RequestMethod.GET)
+			method=RequestMethod.POST)
 	public ModelAndView addFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
+		System.out.println(film);
 		dao.createFilm(film);
 //		if (film.getId() == 0) {
 //			mv.setViewName("WEB-INF/add.jsp");

@@ -23,6 +23,7 @@ public class Film {
 
 	public Film(String title, String description, Integer releaseYear, String language, Integer rentDuration,
 			Double rentRate, Integer length, Double replaceCost, String rating, String specialFeat) {
+
 		this.title = title;
 		this.description = description;
 		this.releaseYear = releaseYear;
@@ -79,16 +80,16 @@ public class Film {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(Integer releaseYear) {
-		this.releaseYear = releaseYear;
-	}
-
 	public String getLanguage() {
 		return language;
 	}
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public void setReleaseYear(Integer releaseYear) {
+		this.releaseYear = releaseYear;
 	}
 
 	public Integer getRentDuration() {
@@ -263,6 +264,11 @@ public class Film {
 		builder.append(rating);
 		builder.append(", specialFeat=");
 		builder.append(specialFeat);
+		builder.append(", actors=");
+		builder.append(actors);
+		builder.append(", keyword=");
+		builder.append(keyword);
+		builder.append("]");
 		return builder.toString();
 	}
 

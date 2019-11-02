@@ -192,6 +192,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			conn = DriverManager.getConnection(URL, user, password);
 			conn.setAutoCommit(false);
 
+
 			String sqlLang = "SELECT language.id FROM language "
 					+ "join film on film.language_id = language.id where language.name like ?";
 			PreparedStatement psLang = conn.prepareStatement(sqlLang);
@@ -209,7 +210,8 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			if (rs.next()) {
 				categoryId = rs.getInt("id");
 			}
-			
+
+
 			String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, "
 					+ "replacement_cost, rating, special_features) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -242,7 +244,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			}
 			
 			conn.commit();
-			psLang.close();
+//			psLang.close();
 			ps.close();
 			rs.close();
 			conn.close();
