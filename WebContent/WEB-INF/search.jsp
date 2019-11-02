@@ -22,5 +22,6 @@
 		<form:errors path="id" />
 		<input type="submit" value="Search Id" />
 	</form:form>
+	<br />
 </body>
 </html>

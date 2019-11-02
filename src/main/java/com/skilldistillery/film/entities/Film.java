@@ -35,6 +35,7 @@ public class Film {
 		this.rating = rating;
 		this.specialFeat = specialFeat;
 	}
+	
 
 	public String getCategory() {
 		return category;

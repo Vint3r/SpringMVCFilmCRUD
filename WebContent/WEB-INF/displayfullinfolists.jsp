@@ -55,6 +55,10 @@
 				<td>Film Special Features</td>
 				<td>${film.specialFeat}</td>
 			</tr>
+			<tr>
+				<td>Film Category</td>
+				<td>${film.category}</td>
+			</tr>
 		</table>
 		<div class="container">
 			<table>
