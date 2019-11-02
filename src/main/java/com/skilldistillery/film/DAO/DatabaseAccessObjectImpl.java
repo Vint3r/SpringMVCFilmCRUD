@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 import org.springframework.stereotype.Component;
 
@@ -184,8 +185,61 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 	@Override
 	public Film createFilm(Film film) {
-		// TODO Auto-generated method stub
-		return null;
+		int languageId = 0;
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, password);
+			conn.setAutoCommit(false);
+			
+			String sqlLang = "SELECT language.id FROM language "
+					+ "join film on film.language_id = language.id where language.name like ?";
+			PreparedStatement psLang = conn.prepareStatement(sqlLang);
+			psLang.setString(1, "%" + film.getLanguage() + "%");
+			ResultSet rs = psLang.executeQuery();
+			if (rs.next()) {
+				languageId = rs.getInt("id");
+			}
+			
+			String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, "
+					+ "replacement_cost, rating, special_features) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, film.getTitle());
+			ps.setString(2, film.getDescription());
+			ps.setInt(3, film.getReleaseYear());
+			ps.setInt(4, languageId);
+			ps.setInt(5, film.getRentDuration());
+			ps.setDouble(6, film.getRentRate());
+			ps.setInt(7, film.getLength());
+			ps.setDouble(8, film.getReplaceCost());
+			ps.setString(9, film.getRating());
+			ps.setString(10, film.getSpecialFeat());
+			
+			int rowsChanged = ps.executeUpdate();
+			rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				film.setId(rs.getInt(1));
+				System.out.println(rowsChanged + " movies added to the data base.");
+				System.out.println("Film id is " + film.getId());
+			}
+			conn.commit();
+			psLang.close();
+			ps.close();
+			rs.close();
+			conn.close();
+			return film;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+					conn.close();
+				} catch (SQLException e1) {
+					System.err.println("Problem with rollback");
+					e1.printStackTrace();
+				}
+			}
+			return null;
+		}
 	}
 
 	@Override

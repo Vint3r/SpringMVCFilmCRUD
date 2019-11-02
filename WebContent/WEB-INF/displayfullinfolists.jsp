@@ -8,6 +8,7 @@
 <title>Films</title>
 </head>
 <body>
+	<c:forEach var="film" items="${films}">
 		<h1>${film.title}</h1>
 		<table>
 			<tr>
@@ -62,6 +63,7 @@
 				</c:forEach>
 
 			</table>
+	</c:forEach>
 	<p>
 
 		<a href="index.html" class="btn btn-secondary" role="button">Back
