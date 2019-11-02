@@ -13,42 +13,42 @@
 	<form:form action="addFilm.do" method="POST" modelAttribute="film">
 	<table>
 	<tr>
-		<td><form:label path="title">Title(String):</form:label></td>
+		<td><form:label path="title">Title(varchar(255)):</form:label></td>
 		<td><form:input path="title" />
 		<form:errors path="title" /></td>
 		</tr>
 		<tr>
-		<td><form:label path="description">Description(String):</form:label></td>
+		<td><form:label path="description">Description(text):</form:label></td>
 		<td><form:input path="description" />
 		<form:errors path="description" /></td>
 		</tr>
 		<tr>
-		<td><form:label path="releaseYear">Release Year(Integer):</form:label></td>
+		<td><form:label path="releaseYear">Release Year(year(4)):</form:label></td>
 		<td><form:input path="releaseYear" />
 		<form:errors path="releaseYear" /></td>
 		</tr>
 		<tr>
-		<td><form:label path="language">Language(String):</form:label></td>
+		<td><form:label path="language">Language(??smallint(5)unsigned):</form:label></td>
 		<td><form:input path="language" />
 		<form:errors path="language" /></td>
 		</tr>
 		<tr>
-		<td><form:label path="rentDuration">Rent Duration(Integer):</form:label></td>
+		<td><form:label path="rentDuration">Rent Duration(tinyint(3)unsigned):</form:label></td>
 		<td><form:input path="rentDuration" />
 		<form:errors path="rentDuration" /></td>
 		</tr>
 		<tr>
-		<td><form:label path="rentRate">Rent Rate(Double):</form:label></td>
+		<td><form:label path="rentRate">Rent Rate(decimal(4,2)):</form:label></td>
 		<td><form:input path="rentRate" />
 		<form:errors path="rentRate" /></td>
 		</tr>
 		<tr>
-		<td><form:label path="length">Length(Integer):</form:label></td>
+		<td><form:label path="length">Length(smallint(5)unsigned):</form:label></td>
 		<td><form:input path="length" />
 		<form:errors path="length" /></td>
 		</tr>
 		<tr>
-		<td><form:label path="replaceCost">Replace Cost(Double):</form:label></td>
+		<td><form:label path="replaceCost">Replace Cost(decimal(5,2)):</form:label></td>
 		<td><form:input path="replaceCost" />
 		<form:errors path="replaceCost" /></td>
 		</tr>
