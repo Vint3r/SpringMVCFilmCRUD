@@ -114,6 +114,53 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			return actors;
 		}
 	}
+	@Override
+	public List<Film> findFilmByWord(String key) {
+		Connection conn = null;
+		List<Film> filmsWanted = new ArrayList<>();
+
+		try {
+			conn = DriverManager.getConnection(URL, user, password);
+		String sqlComm = "select film.*, language.name from film "
+				+ "join language on film.language_id = language.id where title like ? or description like ?";
+
+		PreparedStatement ps = conn.prepareStatement(sqlComm);
+		ps.setString(1, "%" + key + "%");
+		ps.setString(2, "%" + key + "%");
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Film filmWanted = new Film();
+			filmWanted.setId(rs.getInt("id"));
+			filmWanted.setTitle(rs.getString("title"));
+			filmWanted.setDescription(rs.getString("description"));
+			filmWanted.setReleaseYear(rs.getInt("release_year"));
+			filmWanted.setLanguage(rs.getString("name"));
+			filmWanted.setRentDuration(rs.getInt("rental_duration"));
+			filmWanted.setRentRate(rs.getDouble("rental_rate"));
+			filmWanted.setLength(rs.getInt("length"));
+			filmWanted.setReplaceCost(rs.getDouble("replacement_cost"));
+			filmWanted.setRating(rs.getString("rating"));
+			filmWanted.setSpecialFeat(rs.getString("special_features"));
+			filmWanted.setActors(findActorsByFilmId(filmWanted.getId()));
+			filmsWanted.add(filmWanted);
+			filmWanted = null;
+		}
+		rs.close();
+		ps.close();
+		conn.close();
+		return filmsWanted;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		return filmsWanted;
+	}
 
 	@Override
 	public Actor findActorById(int actorId) {
@@ -121,11 +168,6 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 		return null;
 	}
 
-	@Override
-	public List<Film> findFilmByWord(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Film> findFilmByActorId(int actorId) {
