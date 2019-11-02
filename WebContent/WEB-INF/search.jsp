@@ -6,22 +6,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+<title>Search</title>
 </head>
 <body>
 	<form:form action="login.do" method="POST" modelAttribute="film">
 
 		<form:label path="keyword">Keyword:</form:label>
-		<form:input path="email" />
-		<form:errors path="email" />
-		<input type="submit" value="Login" />
+		<form:input path="keyword" />
+		<form:errors path="keyword" />
+		<input type="submit" value="Search Keyword" />
 		</form:form>
 		<br />
 			<form:form action="login.do" method="POST" modelAttribute="film">
 		<form:label path="id">ID:</form:label>
-		<form:input path="password" />
-		<form:errors path="password" />
-		<input type="submit" value="Login" />
+		<form:input path="id" />
+		<form:errors path="id" />
+		<input type="submit" value="Search Id" />
 	</form:form>
 </body>
 </html>
