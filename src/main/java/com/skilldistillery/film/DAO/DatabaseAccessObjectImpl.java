@@ -194,7 +194,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 
 			String sqlLang = "SELECT language.id FROM language "
-					+ "join film on film.language_id = language.id where language.name like ?";
+					+ "where language.name like ?";
 			PreparedStatement psLang = conn.prepareStatement(sqlLang);
 			psLang.setString(1, "%" + film.getLanguage() + "%");
 			ResultSet rs = psLang.executeQuery();

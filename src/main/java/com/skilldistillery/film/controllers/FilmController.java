@@ -61,7 +61,7 @@ public class FilmController {
 	
 	@RequestMapping(path="addFilm.do",
 			params= {"title", "description", "releaseYear", "language", "rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat"},
-			method=RequestMethod.POST)
+			method=RequestMethod.GET)
 	public ModelAndView addFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
