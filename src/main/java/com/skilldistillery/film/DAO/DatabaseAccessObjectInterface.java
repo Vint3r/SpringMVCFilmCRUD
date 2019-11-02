@@ -15,4 +15,6 @@ public interface DatabaseAccessObjectInterface {
 	  public List<Film> findFilmByActorId(int actorId);
 	  public Film createFilm(Film film);
 	  public boolean deleteFilm(Film film);
-	  public Film updateFilm(Film film);}
+	  public Film updateFilm(Film film);
+	  
+}

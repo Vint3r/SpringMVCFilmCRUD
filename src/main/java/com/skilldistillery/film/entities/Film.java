@@ -15,6 +15,15 @@ public class Film {
 	private String rating;
 	private String specialFeat;
 	private List<Actor> actors;
+	private String keyword;
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 	public Film() {
 	}
