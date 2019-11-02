@@ -15,8 +15,8 @@ public class FilmController {
 	@Autowired
 	private DatabaseAccessObjectImpl dao;
 	
-	public void setDatabaseAccessorObjectImpl(DatabaseAccessObjectImpl dao) {
-		this.dao = dao;
+	 {
+		dao = new DatabaseAccessObjectImpl();
 	}
 	
 	@RequestMapping(path="search.do", method=RequestMethod.GET)

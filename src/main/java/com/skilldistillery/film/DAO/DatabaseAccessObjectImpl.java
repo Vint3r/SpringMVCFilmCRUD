@@ -58,11 +58,11 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				filmWanted.setRating(rs.getString("rating"));
 				filmWanted.setSpecialFeat(rs.getString("special_features"));
 				filmWanted.setActors(findActorsByFilmId(filmId));
-				return filmWanted;
 			}
 			conn.close();
 			ps.close();
 			rs.close();
+			return filmWanted;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			if (conn != null) {
