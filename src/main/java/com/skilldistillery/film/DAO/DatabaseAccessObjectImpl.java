@@ -35,8 +35,11 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 		try {
 			conn = DriverManager.getConnection(URL, user, password);
 
-			String sqlComm = "SELECT film.*, language.name FROM film "
-					+ "JOIN language ON language.id = film.language_id WHERE film.id = ?";
+			String sqlComm = "SELECT film.*, language.name, category.name FROM film "
+					+ "JOIN language ON language.id = film.language_id "
+					+ "join film_category on film.id = film_category.film_id " + 
+					"join category on category.id = film_category.category_id "
+					+ "WHERE film.id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sqlComm);
 			ps.setInt(1, filmId);
@@ -114,6 +117,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			return actors;
 		}
 	}
+//	select film.*, language.name, category.name from film join language on language.id = film.language_id join film_category on film.id = film_category.film_id join category on category.id = film_category.category_id where film.id = 1;
 	@Override
 	public List<Film> findFilmByWord(String key) {
 		Connection conn = null;
@@ -121,8 +125,11 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 		try {
 			conn = DriverManager.getConnection(URL, user, password);
-		String sqlComm = "select film.*, language.name from film "
-				+ "join language on film.language_id = language.id where title like ? or description like ?";
+		String sqlComm = "select film.*, language.name, category.name from film "
+				+ "join language on film.language_id = language.id "
+				+ "join film_category on film.id = film_category.film_id "
+				+ "join category on category.id = film_category.category_id "
+				+ "where title like ? or description like ?";
 
 		PreparedStatement ps = conn.prepareStatement(sqlComm);
 		ps.setString(1, "%" + key + "%");
