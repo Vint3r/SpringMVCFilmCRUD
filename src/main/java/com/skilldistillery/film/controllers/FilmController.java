@@ -74,5 +74,19 @@ public class FilmController {
 		return mv;
 		
 	}
-
+	
+	@RequestMapping(path="delete.do",
+			params= {"title", "description", "releaseYear", "language", "rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat"},
+			method=RequestMethod.GET)
+	public ModelAndView deleteFilm(Film film) {
+		ModelAndView mv = new ModelAndView();
+		boolean worked = dao.deleteFilm(film);
+		if (worked) {
+			mv.setViewName("WEB-INF/index.html");
+			return mv;
+		} else {
+			mv.setViewName("WEB-INF/displayfullinfo.jsp");
+			return mv;
+		}
+	}
 }

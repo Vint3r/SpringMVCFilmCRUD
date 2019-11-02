@@ -38,9 +38,8 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 			String sqlComm = "SELECT film.*, language.name, category.name FROM film "
 					+ "JOIN language ON language.id = film.language_id "
-					+ "join film_category on film.id = film_category.film_id " + 
-					"join category on category.id = film_category.category_id "
-					+ "WHERE film.id = ?";
+					+ "join film_category on film.id = film_category.film_id "
+					+ "join category on category.id = film_category.category_id " + "WHERE film.id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sqlComm);
 			ps.setInt(1, filmId);
@@ -82,30 +81,30 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 		Connection conn = null;
 
 		List<Actor> actors = new ArrayList<>();
-		
+
 		try {
 			conn = DriverManager.getConnection(URL, user, password);
 
-		String sqlComm = "SELECT actor.id, actor.first_name, actor.last_name FROM actor "
-				+ "JOIN film_actor ON actor.id = film_actor.actor_id "
-				+ "JOIN film ON film.id = film_actor.film_id WHERE film.id = ?";
+			String sqlComm = "SELECT actor.id, actor.first_name, actor.last_name FROM actor "
+					+ "JOIN film_actor ON actor.id = film_actor.actor_id "
+					+ "JOIN film ON film.id = film_actor.film_id WHERE film.id = ?";
 
-		PreparedStatement ps = conn.prepareStatement(sqlComm);
-		ps.setInt(1, filmId);
-		ResultSet rs = ps.executeQuery();
+			PreparedStatement ps = conn.prepareStatement(sqlComm);
+			ps.setInt(1, filmId);
+			ResultSet rs = ps.executeQuery();
 
-		while (rs.next()) {
-			Actor actor = new Actor();
-			actor.setActorID(rs.getInt("id"));
-			actor.setFirstName(rs.getString("first_name"));
-			actor.setLastName(rs.getString("last_name"));
-			actors.add(actor);
-			actor = null;
-		}
-		rs.close();
-		ps.close();
-		conn.close();
-		return actors;
+			while (rs.next()) {
+				Actor actor = new Actor();
+				actor.setActorID(rs.getInt("id"));
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
+				actors.add(actor);
+				actor = null;
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+			return actors;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			if (conn != null) {
@@ -118,6 +117,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			return actors;
 		}
 	}
+
 //	select film.*, language.name, category.name from film join language on language.id = film.language_id join film_category on film.id = film_category.film_id join category on category.id = film_category.category_id where film.id = 1;
 	@Override
 	public List<Film> findFilmByWord(String key) {
@@ -126,37 +126,37 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 		try {
 			conn = DriverManager.getConnection(URL, user, password);
-		String sqlComm = "select film.*, language.name, category.name from film "
-				+ "join language on film.language_id = language.id "
-				+ "join film_category on film.id = film_category.film_id "
-				+ "join category on category.id = film_category.category_id "
-				+ "where title like ? or description like ?";
+			String sqlComm = "select film.*, language.name, category.name from film "
+					+ "join language on film.language_id = language.id "
+					+ "join film_category on film.id = film_category.film_id "
+					+ "join category on category.id = film_category.category_id "
+					+ "where title like ? or description like ?";
 
-		PreparedStatement ps = conn.prepareStatement(sqlComm);
-		ps.setString(1, "%" + key + "%");
-		ps.setString(2, "%" + key + "%");
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			Film filmWanted = new Film();
-			filmWanted.setId(rs.getInt("id"));
-			filmWanted.setTitle(rs.getString("title"));
-			filmWanted.setDescription(rs.getString("description"));
-			filmWanted.setReleaseYear(rs.getInt("release_year"));
-			filmWanted.setLanguage(rs.getString("name"));
-			filmWanted.setRentDuration(rs.getInt("rental_duration"));
-			filmWanted.setRentRate(rs.getDouble("rental_rate"));
-			filmWanted.setLength(rs.getInt("length"));
-			filmWanted.setReplaceCost(rs.getDouble("replacement_cost"));
-			filmWanted.setRating(rs.getString("rating"));
-			filmWanted.setSpecialFeat(rs.getString("special_features"));
-			filmWanted.setActors(findActorsByFilmId(filmWanted.getId()));
-			filmsWanted.add(filmWanted);
-			filmWanted = null;
-		}
-		rs.close();
-		ps.close();
-		conn.close();
-		return filmsWanted;
+			PreparedStatement ps = conn.prepareStatement(sqlComm);
+			ps.setString(1, "%" + key + "%");
+			ps.setString(2, "%" + key + "%");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Film filmWanted = new Film();
+				filmWanted.setId(rs.getInt("id"));
+				filmWanted.setTitle(rs.getString("title"));
+				filmWanted.setDescription(rs.getString("description"));
+				filmWanted.setReleaseYear(rs.getInt("release_year"));
+				filmWanted.setLanguage(rs.getString("name"));
+				filmWanted.setRentDuration(rs.getInt("rental_duration"));
+				filmWanted.setRentRate(rs.getDouble("rental_rate"));
+				filmWanted.setLength(rs.getInt("length"));
+				filmWanted.setReplaceCost(rs.getDouble("replacement_cost"));
+				filmWanted.setRating(rs.getString("rating"));
+				filmWanted.setSpecialFeat(rs.getString("special_features"));
+				filmWanted.setActors(findActorsByFilmId(filmWanted.getId()));
+				filmsWanted.add(filmWanted);
+				filmWanted = null;
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+			return filmsWanted;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			if (conn != null) {
@@ -176,7 +176,6 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 		return null;
 	}
 
-
 	@Override
 	public List<Film> findFilmByActorId(int actorId) {
 		// TODO Auto-generated method stub
@@ -190,7 +189,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 		try {
 			conn = DriverManager.getConnection(URL, user, password);
 			conn.setAutoCommit(false);
-			
+
 			String sqlLang = "SELECT language.id FROM language "
 					+ "join film on film.language_id = language.id where language.name like ?";
 			PreparedStatement psLang = conn.prepareStatement(sqlLang);
@@ -199,7 +198,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			if (rs.next()) {
 				languageId = rs.getInt("id");
 			}
-			
+
 			String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, "
 					+ "replacement_cost, rating, special_features) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -213,7 +212,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			ps.setDouble(8, film.getReplaceCost());
 			ps.setString(9, film.getRating());
 			ps.setString(10, film.getSpecialFeat());
-			
+
 			int rowsChanged = ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
 			if (rs.next()) {
@@ -244,8 +243,43 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 	@Override
 	public boolean deleteFilm(Film film) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection(URL, user, password);
+			conn.setAutoCommit(false);
+
+			String sql = "DELETE FROM film_actor WHERE film_id = ?";
+			String sql2 = "DELETE FROM film WHERE id = ?";
+			int filmId = film.getId();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, filmId);
+			int rowsChanged = ps.executeUpdate();
+			System.out.println(rowsChanged + " rows deleted from the Film_Actor data base.");
+
+			ps = conn.prepareStatement(sql2);
+			ps.setInt(1, filmId);
+			rowsChanged = ps.executeUpdate();
+			System.out.println(rowsChanged + " film deleted from the Film data base.");
+
+			conn.commit();
+			ps.close();
+			conn.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+					System.err.println("Problem with rollback on Data base.");
+				}
+			}
+			return false;
+		}
 	}
 
 	@Override
