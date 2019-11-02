@@ -205,7 +205,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			String sqlCat = "SELECT category.id from category join film_category on film_category.category_id = category.id where category.name like ?";
 			psLang = conn.prepareStatement(sqlCat);
 			int categoryId = 0;
-			psLang.setString(1, "%" + film.getRating() + "%");
+			psLang.setString(1, "%" + film.getCategory() + "%");
 			rs = psLang.executeQuery();
 			if (rs.next()) {
 				categoryId = rs.getInt("id");
