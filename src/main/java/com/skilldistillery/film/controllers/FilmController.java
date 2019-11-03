@@ -74,7 +74,6 @@ public class FilmController {
 		System.out.println(film);
 		film = dao.createFilm(film);
 		if (film == null) {
-			errors.r
 		}
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
