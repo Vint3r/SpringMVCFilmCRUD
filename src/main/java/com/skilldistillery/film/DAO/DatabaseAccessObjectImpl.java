@@ -222,7 +222,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			ps.setDouble(8, film.getReplaceCost());
 			ps.setString(9, film.getRating());
 			ps.setString(10, film.getSpecialFeat());
-			film.setActors(generateActors());
+			film.setActors(generateActors(film));
 
 			int rowsChanged = ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
@@ -262,9 +262,11 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 		}
 	}
 
-	public List<Actor> generateActors() {
+	public List<Actor> generateActors(Film film) {
 		int actorCount = (int) (Math.random() * 10) + 1;
+		List<Actor> actors = new ArrayList<>();
 		Connection conn = null;
+		List<Actor> actorsToBeUsed = new ArrayList<>();
 		
 		try {
 			conn = DriverManager.getConnection(URL, user, password);
@@ -272,9 +274,30 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			ResultSet rs = ps.executeQuery();
-			while(rs.next())
+			while(rs.next()) {
+				Actor actor = new Actor();
+				actor.setActorID(rs.getInt("id"));
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
+				actors.add(actor);
+			}
+			
+			for (int i = 0; i < actorCount; i++) {
+				actorsToBeUsed.add(actors.remove((int) ((Math.random() * 200) + 1) - i));
+			}
+			ps.close();
+			rs.close();
+			conn.close();
+			return actorsToBeUsed;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
 		}
 		
 		return null;
@@ -402,4 +425,5 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 		}
 		return null;
 	}
+
 }
