@@ -192,16 +192,14 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			conn = DriverManager.getConnection(URL, user, password);
 			conn.setAutoCommit(false);
 
-
-			String sqlLang = "SELECT language.id FROM language "
-					+ "where language.name like ?";
+			String sqlLang = "SELECT language.id FROM language " + "where language.name like ?";
 			PreparedStatement psLang = conn.prepareStatement(sqlLang);
 			psLang.setString(1, "%" + film.getLanguage() + "%");
 			ResultSet rs = psLang.executeQuery();
 			if (rs.next()) {
 				languageId = rs.getInt("id");
 			}
-			
+
 			String sqlCat = "SELECT category.id from category join film_category on film_category.category_id = category.id where category.name like ?";
 			psLang = conn.prepareStatement(sqlCat);
 			int categoryId = 0;
@@ -210,7 +208,6 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			if (rs.next()) {
 				categoryId = rs.getInt("id");
 			}
-
 
 			String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, "
 					+ "replacement_cost, rating, special_features) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -233,7 +230,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				System.out.println(rowsChanged + " movies added to the data base.");
 				System.out.println("Film id is " + film.getId());
 			}
-			
+
 			String insertCat = "insert into film_category (category_id, film_id) values (?, ?)";
 			ps = conn.prepareStatement(insertCat);
 			ps.setInt(1, categoryId);
@@ -242,7 +239,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			if (rs.next()) {
 				System.out.println(rowsChanged + " to the film_category table");
 			}
-			
+
 			conn.commit();
 //			psLang.close();
 			ps.close();
@@ -313,8 +310,77 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 	@Override
 	public Film updateFilm(Film film) {
-		// TODO Auto-generated method stub
+		Connection conn = null;
+
+		try {
+			int languageId = 0;
+			int catId = 0;
+			conn = DriverManager.getConnection(URL, user, password);
+			conn.setAutoCommit(false);
+
+			String sqlLang = "SELECT language.id FROM language "
+					+ "join film on film.language_id = language.id where language.name like ?";
+			PreparedStatement psLang = conn.prepareStatement(sqlLang);
+			psLang.setString(1, "%" + film.getLanguage() + "%");
+			ResultSet rs = psLang.executeQuery();
+			if (rs.next()) {
+				languageId = rs.getInt("id");
+			}
+
+			String sqlCate = "SELECT category.id from category where category.name like ?";
+			psLang = conn.prepareStatement(sqlCate);
+			psLang.setString(1, "%" + film.getCategory() + "%");
+			rs = psLang.executeQuery();
+			if (rs.next()) {
+				catId = rs.getInt("id");
+			}
+
+			String sql = "UPDATE film SET title = ?, description = ?, release_year = ?, language_id = ?, rental_duration = ?, rental_rate = ?"
+					+ ", length = ?, replacement_cost = ?, rating = ?, special_features = ? where id = ?";
+			String sql2 = "UPDATE film_category SET category_id = ? where film_id = ?";
+
+			psLang = conn.prepareStatement(sql2);
+			psLang.setInt(1, catId);
+			psLang.setInt(2, film.getId());
+
+			int rowsChanged = psLang.executeUpdate();
+			System.out.println(rowsChanged + " rows changed in the film_category table");
+			
+			System.out.println(film);
+			psLang = conn.prepareStatement(sql);
+			psLang.setString(1, film.getTitle());
+			psLang.setString(2, film.getDescription());
+			psLang.setInt(3, film.getReleaseYear());
+			psLang.setInt(4, languageId);
+			psLang.setInt(5, film.getRentDuration());
+			psLang.setDouble(6, film.getRentRate());
+			psLang.setInt(7, film.getLength());
+			psLang.setDouble(8, film.getReplaceCost());
+			psLang.setString(9, film.getRating());
+			psLang.setString(10, film.getSpecialFeat());
+			psLang.setInt(11, film.getId());
+			System.out.println(psLang);
+
+			rowsChanged = psLang.executeUpdate();
+			System.out.println(rowsChanged + " rows changed in the film table");
+
+			conn.commit();
+			psLang.close();
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+				System.err.println("Error encountered, starting rollback");
+				try {
+					conn.rollback();
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+					System.err.println("Problem encountered with rollback.");
+				}
+			}
+		}
 		return null;
 	}
-
 }
