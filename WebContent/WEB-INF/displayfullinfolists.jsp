@@ -73,8 +73,6 @@
 
 
 			</table>
-			<a href="index.html" class="btn btn-secondary" role="button">Back
-		to Home</a>
 	<br>
 	<form:form action="delete.do" method="GET" modelAttribute="film">
 		<form:label path="id">ID:</form:label>
@@ -106,7 +104,7 @@
 		<form:radiobutton path="language" value="Japanese"/>Japanese
 		<form:radiobutton path="language" value="Mandarin"/>Mandarin
 		<form:radiobutton path="language" value="French"/>French
-		<form:radiobutton path="language" value="German"/></td>
+		<form:radiobutton path="language" value="German"/>German</td>
 		<form:radiobutton path="language" value="${film.language}"/>
 		<form:errors path="language"/>
 		</tr>
@@ -156,7 +154,7 @@
 		<br>
 	</form:form>
 	</c:forEach>
-	
+	<a href="index.html" class="btn btn-secondary" role="button">Back to Home</a>
 	</div>
 </body>
 </html>

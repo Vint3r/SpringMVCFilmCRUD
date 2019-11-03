@@ -34,7 +34,7 @@
 		<form:radiobutton path="language" value="Japanese"/>Japanese
 		<form:radiobutton path="language" value="Mandarin"/>Mandarin
 		<form:radiobutton path="language" value="French"/>French
-		<form:radiobutton path="language" value="German"/></td>
+		<form:radiobutton path="language" value="German"/>German</td>
 		<form:errors path="language" />
 		</tr>
 		<tr>

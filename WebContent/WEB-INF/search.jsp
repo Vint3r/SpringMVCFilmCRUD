@@ -22,6 +22,7 @@
 		<form:errors path="id" />
 		<input type="submit" value="Search Id" />
 	</form:form>
+	<a href="index.html" class="btn btn-secondary" role="button">Back to Home</a>
 	<br />
 </body>
 </html>
