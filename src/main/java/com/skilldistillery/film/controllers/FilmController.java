@@ -48,8 +48,8 @@ public class FilmController {
 		int filmId = film.getId();
 		film = dao.findFilmById(filmId);
 		if (film == null) {
-			errors.rejectValue("film", "error.film", "Unable to delete film from data base");
-			mv.setViewName("WEB-INF/displayfullinfo.jsp");
+			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
+			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}
 		mv.addObject("film", film);
