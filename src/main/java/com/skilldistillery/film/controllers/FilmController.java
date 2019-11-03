@@ -44,13 +44,13 @@ public class FilmController {
 	@RequestMapping(path = "searchid.do", params = "id", method = RequestMethod.GET)
 	public ModelAndView goToSearchById(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
-		int filmId = film.getId();
-		film = dao.findFilmById(filmId);
-		if (film == null) {
-			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
+		Integer filmId = film.getId();
+		if (film == null || filmId == null) {
+			errors.rejectValue("id", "error.id", "Unable to locate film in data base");
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}
+		film = dao.findFilmById(filmId);
 		mv.addObject("film", film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
@@ -60,9 +60,14 @@ public class FilmController {
 	public ModelAndView goToSearchByKW(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		String key = film.getKeyword();
+		if (key == "") {
+			errors.rejectValue("keyword", "error.keyword", "Unable to find movies related to keyword");
+			mv.setViewName("WEB-INF/search.jsp");
+			return mv;
+		}
 		List<Film> films = dao.findFilmByWord(key);
 		if (films.size() <= 0) {
-			errors.rejectValue("keyword", "error.keyword", "Unable to find movies related to keyword: " + key);
+			errors.rejectValue("keyword", "error.keyword", "Unable to find movies related to keyword");
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}
