@@ -15,6 +15,6 @@ public interface DatabaseAccessObjectInterface {
 	  public Film createFilm(Film film);
 	  public boolean deleteFilm(Film film);
 	  public Film updateFilm(Film film);
-	  public List<Actor> generateActors();
+	  public List<Actor> generateActors(Film film);
 	  
 }
