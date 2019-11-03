@@ -77,10 +77,10 @@ public class FilmController {
 	public ModelAndView addFilm(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
-//		if (errors.getErrorCount() > 0) {
-//			mv.setViewName("WEB-INF/add.jsp");
-//			return mv;
-//		}
+		if (errors.getErrorCount() > 0) {
+			mv.setViewName("WEB-INF/add.jsp");
+			return mv;
+		}
 		
 		film = dao.createFilm(film);
 		if (film == null) {

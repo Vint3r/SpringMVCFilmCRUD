@@ -30,7 +30,7 @@
 			</tr>
 			<tr>
 				<td>Film Category</td>
-				<td>${film.category}</td>
+				<td>${film.category }</td>
 			</tr>
 			<tr>
 				<td>Film Language</td>
