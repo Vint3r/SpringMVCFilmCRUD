@@ -73,8 +73,7 @@
 
 
 			</table>
-	</c:forEach>
-	<a href="index.html" class="btn btn-secondary" role="button">Back
+			<a href="index.html" class="btn btn-secondary" role="button">Back
 		to Home</a>
 	<br>
 	<form:form action="delete.do" method="GET" modelAttribute="film">
@@ -83,9 +82,74 @@
 		<form:errors path="id" />
 		<input type="submit" value="Delete ID" />
 	</form:form>
-	<form action="update.do" method="GET">
-		<input type="submit" value="update.do Button" />
-	</form>
+	<form:form action="update.do" method="GET" modelAttribute="film">
+<table><tr>
+		<td><form:label path="title" value="${film.title}">Title(String):</form:label></td>
+		<td><form:input path="title" value="${film.title}"/>
+		<form:errors path="title" value="${film.title}" /></td>
+		<br />
+		</tr>
+		<tr>
+		<td><form:label path="description" value="${film.description}">Description(String):</form:label></td>
+		<td><form:input path="description" value="${film.description}"/>
+		<form:errors path="description" value="${film.description}"/></td>
+		</tr>
+		<tr>
+		<td><form:label path="releaseYear" value="${film.releaseYear}">Release Year(Integer):</form:label></td>
+		<td><form:input path="releaseYear" value="${film.releaseYear}"/>
+		<form:errors path="releaseYear" value="${film.releaseYear}"/></td>
+		</tr>
+		<tr>
+		<td><form:label path="language" value="${film.language}">Language(String):</form:label></td>
+		<td><form:input path="language" value="${film.language}"/>
+		<form:errors path="language" value="${film.language}"/></td>
+		</tr>
+		<tr>
+		<td><form:label path="rentDuration" value="${film.rentDuration}">Rent Duration(Integer):</form:label></td>
+		<td><form:input path="rentDuration" value="${film.rentDuration}"/>
+		<form:errors path="rentDuration" value="${film.rentDuration}"/></td>
+		</tr>
+		<tr>
+		<td><form:label path="rentRate" value="${film.rentRate}">Rent Rate(Double):</form:label></td>
+		<td><form:input path="rentRate" value="${film.rentRate}"/>
+		<form:errors path="rentRate" value="${film.rentRate}"/></td>
+		</tr>
+		<tr>
+		<td><form:label path="length" value="${film.length}">Length(Integer):</form:label></td>
+		<td><form:input path="length" value="${film.length}"/>
+		<form:errors path="length" value="${film.length}"/></td>
+		</tr>
+		<tr>
+		<td><form:label path="replaceCost" value="${film.replaceCost}">Replace Cost(Double):</form:label></td>
+		<td><form:input path="replaceCost" value="${film.replaceCost}"/>
+		<form:errors path="replaceCost" value="${film.replaceCost}"/></td>
+		</tr>
+		<tr>
+		<td><form:label path="category" value="${film.category}">category(String):</form:label></td>
+		<td><form:input path="category" value="${film.category}"/>
+		<form:errors path="category" value="${film.category}"/></td>
+		</tr>
+		<tr>
+		<td><form:label path="rating" value="${film.rating}">Rating:</form:label></td>
+		<td><form:radiobutton path="rating" value="G"/>G
+		<form:radiobutton path="rating" value="PG"/>PG 
+		<form:radiobutton path="rating" value="PG-13"/>PG-13
+		<form:radiobutton path="rating" value="R"/>R
+		<form:radiobutton path="rating" value="NC-17"/>NC-17</td> 
+		</tr>
+		<tr>
+		<td><form:label path="specialFeat" value="${film.specialFeat}">Special Features(String):</form:label></td>
+		<td><form:input path="specialFeat" value="${film.specialFeat}"/>
+		<form:errors path="specialFeat" value="${film.specialFeat}"/></td>
+		</tr>
+		<tr>
+		<td><input type="submit" value="Update Film" /></td>
+		</tr>
+		</table>
+		<br>
+	</form:form>
+	</c:forEach>
+	
 	</div>
 </body>
 </html>

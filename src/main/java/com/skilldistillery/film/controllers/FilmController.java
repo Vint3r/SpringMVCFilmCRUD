@@ -85,4 +85,13 @@ public class FilmController {
 //			return mv;
 //		}
 	}
+	
+	@RequestMapping(path = "update.do", params = {"title", "description", "releaseYear", "language", "rentDuration",
+			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category"}, method = RequestMethod.GET)
+	public ModelAndView goToUpdate(Film film) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject(film);
+		mv.setViewName("WEB-INF/update.jsp");
+		return mv;
+	}
 }
