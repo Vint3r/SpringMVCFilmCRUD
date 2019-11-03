@@ -48,8 +48,8 @@ public class FilmController {
 		int filmId = film.getId();
 		film = dao.findFilmById(filmId);
 		if (film == null) {
-			errors.rejectValue("film", "error.film", "Unable to delete film from data base");
-			mv.setViewName("WEB-INF/displayfullinfo.jsp");
+			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
+			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}
 		mv.addObject("film", film);
@@ -72,7 +72,10 @@ public class FilmController {
 	public ModelAndView addFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
-		dao.createFilm(film);
+		film = dao.createFilm(film);
+		if (film == null) {
+			errors.r
+		}
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;

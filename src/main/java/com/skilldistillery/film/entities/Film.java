@@ -19,7 +19,11 @@ public class Film {
 	@Max (4)
 	@Min (4)
 	private Integer releaseYear;
+<<<<<<< HEAD
 	@NotNull
+=======
+	@Size
+>>>>>>> 024f06d29a2319a890bd87635456785b2b7fc1f3
 	private String language;
 	@Max (3)
 	private Integer rentDuration;
