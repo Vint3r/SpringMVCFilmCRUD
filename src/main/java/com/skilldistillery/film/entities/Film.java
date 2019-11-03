@@ -9,12 +9,17 @@ import javax.validation.constraints.Size;
 
 
 public class Film {
+	@NotNull
 	private Integer id;
+	@NotNull
 	@Size (max=255)
 	private String title;
+	@Size (max=255)
 	private String description;
+	@Max (4)
 	@Min (4)
 	private Integer releaseYear;
+	@NotNull
 	private String language;
 	@Max (3)
 	private Integer rentDuration;
@@ -22,11 +27,11 @@ public class Film {
 	private Double rentRate;
 	@Max (5)
 	private Integer length;
+	@NotNull
 	@Max (5)
 	private Double replaceCost;
 	private String rating;
 	private String specialFeat;
-	
 	private List<Actor> actors;
 	private String keyword;
 	@Size (max=25)
