@@ -45,11 +45,6 @@ public class FilmController {
 	public ModelAndView goToSearchById(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		int filmId = film.getId();
-//		if (errors.getErrorCount() > 1) {
-//			mv.setViewName("WEB-INF/search.jsp");
-//			return mv;
-//		}
-		
 		film = dao.findFilmById(filmId);
 		if (film == null) {
 			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
@@ -65,11 +60,6 @@ public class FilmController {
 	public ModelAndView goToSearchByKW(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		String key = film.getKeyword();
-		if (errors.getErrorCount() > 0) {
-			mv.setViewName("WEB-INF/search.jsp");
-			return mv;
-		}
-		
 		List<Film> films = dao.findFilmByWord(key);
 		if (films.size() <= 0) {
 			errors.rejectValue("keyword", "error.keyword", "Unable to find movies related to keyword: " + key);
