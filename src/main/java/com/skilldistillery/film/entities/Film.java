@@ -32,7 +32,6 @@ public class Film {
 	private Double replaceCost;
 	private String rating;
 	private String specialFeat;
-	
 	private List<Actor> actors;
 	private String keyword;
 	@Size (max=25)
