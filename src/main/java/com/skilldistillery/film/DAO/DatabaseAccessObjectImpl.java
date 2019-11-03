@@ -440,7 +440,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 					System.err.println("Problem encountered with rollback.");
 				}
 			}
-		}catch (NullPointerException e2) {
+		} catch (NullPointerException e2) {
 			e2.printStackTrace();
 			return film;
 		}
