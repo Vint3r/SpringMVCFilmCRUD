@@ -90,8 +90,9 @@ public class FilmController {
 			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category"}, method = RequestMethod.GET)
 	public ModelAndView goToUpdate(Film film) {
 		ModelAndView mv = new ModelAndView();
+		dao.updateFilm(film);
 		mv.addObject(film);
-		mv.setViewName("WEB-INF/update.jsp");
+		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
 	}
 }

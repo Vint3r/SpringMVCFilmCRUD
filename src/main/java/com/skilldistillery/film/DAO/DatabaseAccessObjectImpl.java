@@ -192,14 +192,16 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			conn = DriverManager.getConnection(URL, user, password);
 			conn.setAutoCommit(false);
 
-			String sqlLang = "SELECT language.id FROM language " + "where language.name like ?";
+
+			String sqlLang = "SELECT language.id FROM language "
+					+ "where language.name like ?";
 			PreparedStatement psLang = conn.prepareStatement(sqlLang);
 			psLang.setString(1, "%" + film.getLanguage() + "%");
 			ResultSet rs = psLang.executeQuery();
 			if (rs.next()) {
 				languageId = rs.getInt("id");
 			}
-
+			
 			String sqlCat = "SELECT category.id from category join film_category on film_category.category_id = category.id where category.name like ?";
 			psLang = conn.prepareStatement(sqlCat);
 			int categoryId = 0;
@@ -208,6 +210,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			if (rs.next()) {
 				categoryId = rs.getInt("id");
 			}
+
 
 			String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, "
 					+ "replacement_cost, rating, special_features) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -230,7 +233,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 				System.out.println(rowsChanged + " movies added to the data base.");
 				System.out.println("Film id is " + film.getId());
 			}
-
+			
 			String insertCat = "insert into film_category (category_id, film_id) values (?, ?)";
 			ps = conn.prepareStatement(insertCat);
 			ps.setInt(1, categoryId);
@@ -239,7 +242,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			if (rs.next()) {
 				System.out.println(rowsChanged + " to the film_category table");
 			}
-
+			
 			conn.commit();
 //			psLang.close();
 			ps.close();
@@ -269,19 +272,19 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			conn = DriverManager.getConnection(URL, user, password);
 			conn.setAutoCommit(false);
 
-			String sql = "DELETE FROM film_actor WHERE film_id = ?";
+//			String sql = "DELETE FROM film_actor WHERE film_id = ?";
 			String sql2 = "DELETE FROM film WHERE id = ?";
 			String sql3 = "DELETE FROM film_category WHERE film_id = ?";
 			int filmId = film.getId();
 
-			PreparedStatement ps = conn.prepareStatement(sql);
+//			PreparedStatement ps = conn.prepareStatement(sql);
+//			ps.setInt(1, filmId);
+//			int rowsChanged = ps.executeUpdate();
+//			System.out.println(rowsChanged + " rows deleted from the Film_Actor data base.");
+//			
+			PreparedStatement ps = conn.prepareStatement(sql3);
 			ps.setInt(1, filmId);
 			int rowsChanged = ps.executeUpdate();
-			System.out.println(rowsChanged + " rows deleted from the Film_Actor data base.");
-
-			ps = conn.prepareStatement(sql3);
-			ps.setInt(1, filmId);
-			rowsChanged = ps.executeUpdate();
 			System.out.println(rowsChanged + " rows deleted from the Film_category table.");
 
 			ps = conn.prepareStatement(sql2);
@@ -310,27 +313,8 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 	@Override
 	public Film updateFilm(Film film) {
-		String sql = "UPDATE film SET title = ?, description = ?, release_year = ?, language_id = ?, rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?, rating = ?, special_features = ? WHERE id = ?";
-		try (Connection conn = DriverManager.getConnection(URL, "student", "student");
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
-			int filmId = film.getId();
-			stmt.setInt(1, filmId);
-			ResultSet filmResult = stmt.executeQuery();
-			if (filmResult.next()) {
-				film = new Film();
-				film.setTitle(filmResult.getString(1));
-				film.setDescription(filmResult.getString(2));
-				film.setReleaseYear(filmResult.getInt(3));
-				film.setRating(filmResult.getString(4));
-				film.setLanguage(filmResult.getString(5));
-				film.setActors(findActorsByFilmId(filmId));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-			
-		}
-		return film;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
