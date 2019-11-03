@@ -168,6 +168,9 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 					e1.printStackTrace();
 				}
 			}
+		} catch (NullPointerException e2) {
+			e2.printStackTrace();
+			return filmsWanted;
 		}
 		return filmsWanted;
 	}
