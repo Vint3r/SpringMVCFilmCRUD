@@ -98,14 +98,13 @@
 		<form:errors path="releaseYear" value="${film.releaseYear}"/></td>
 		</tr>
 		<tr>
-		<td><form:label path="language">Language:</form:label></td>
+		<td><form:label path="language" value="${film.language}">Language:</form:label></td>
 		<td><form:radiobutton path="language" value="English"/>English
 		<form:radiobutton path="language" value="Italian"/>Italian
 		<form:radiobutton path="language" value="Japanese"/>Japanese
 		<form:radiobutton path="language" value="Mandarin"/>Mandarin
 		<form:radiobutton path="language" value="French"/>French
 		<form:radiobutton path="language" value="German"/>German</td>
-		<form:radiobutton path="language" value="${film.language}"/>
 		<form:errors path="language"/>
 		</tr>
 		<tr>
