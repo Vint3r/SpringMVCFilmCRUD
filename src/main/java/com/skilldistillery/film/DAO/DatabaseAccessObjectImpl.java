@@ -264,12 +264,15 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 	public List<Actor> generateActors(Film film) {
 		int actorCount = (int) (Math.random() * 10) + 1;
+		int filmId = film.getId();
 		List<Actor> actors = new ArrayList<>();
 		Connection conn = null;
 		List<Actor> actorsToBeUsed = new ArrayList<>();
 		
 		try {
 			conn = DriverManager.getConnection(URL, user, password);
+			conn.setAutoCommit(false);
+			
 			String sql = "SELECT * from actor";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
@@ -286,6 +289,17 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			for (int i = 0; i < actorCount; i++) {
 				actorsToBeUsed.add(actors.remove((int) ((Math.random() * 200) + 1) - i));
 			}
+			
+			sql = "INSERT INTO film_actor (film_id, actor_id) values (?, ?)";
+			ps = conn.prepareStatement(sql);
+			
+			for (Actor actor : actorsToBeUsed) {
+				int actorId = actor.getActorID();
+				ps.setInt(1, filmId);
+				ps.setInt(2, actorId);
+				ps.executeUpdate();
+			}
+			conn.commit();
 			ps.close();
 			rs.close();
 			conn.close();
@@ -294,9 +308,12 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			e.printStackTrace();
 			if (conn != null) {
 				try {
+					System.err.println("Error encountered, attempting rollback");
+					conn.rollback();
 					conn.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					System.err.println("Problem encountered with rollback");
 				}
 			}
 		}
