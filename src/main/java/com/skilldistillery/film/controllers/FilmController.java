@@ -72,7 +72,10 @@ public class FilmController {
 	public ModelAndView addFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
-		dao.createFilm(film);
+		film = dao.createFilm(film);
+		if (film == null) {
+			errors.r
+		}
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
