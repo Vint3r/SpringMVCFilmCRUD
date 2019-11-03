@@ -58,10 +58,15 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = "searchkw.do", params = "keyword", method = RequestMethod.GET)
-	public ModelAndView goToSearchByKW(Film film) {
+	public ModelAndView goToSearchByKW(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		String key = film.getKeyword();
 		List<Film> films = dao.findFilmByWord(key);
+		if (films.size() <= 0) {
+			errors.rejectValue("keyword", "error.keyword", "Unable to find movies related to keyword: " + key);
+			mv.setViewName("WEB-INF/search.jsp");
+			return mv;
+		}
 		mv.addObject("films", films);
 		mv.setViewName("WEB-INF/displayfullinfolists.jsp");
 		return mv;
@@ -69,12 +74,14 @@ public class FilmController {
 
 	@RequestMapping(path = "addFilm.do", params = { "title", "description", "releaseYear", "language", "rentDuration",
 			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category" }, method = RequestMethod.GET)
-	public ModelAndView addFilm(Film film) {
+	public ModelAndView addFilm(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
 		film = dao.createFilm(film);
 		if (film == null) {
-			errors.r
+			errors.rejectValue("title", "error.title", "Unable to create movie with the given information, please try again.");
+			mv.setViewName("WEB-INF/add.jsp");
+			return mv;
 		}
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
@@ -93,18 +100,19 @@ public class FilmController {
 		} 
 		mv.setViewName("index.html");
 		return mv;
-//		else {
-//			mv.setViewName("WEB-INF/displayfullinfo.jsp");
-//			return mv;
-//		}
 	}
 	
 	@RequestMapping(path = "update.do", params = {"id", "title", "description", "releaseYear", "language", "rentDuration",
 			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category"}, method = RequestMethod.GET)
-	public ModelAndView goToUpdate(Film film) {
+	public ModelAndView goToUpdate(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
-		dao.updateFilm(film);
+		film = dao.updateFilm(film);
+		if (film == null) {
+			errors.rejectValue("title", "error.title", "Unable to update film in the data base, please try again");
+			mv.setViewName("WEB-INF/displayfullinfo.jsp");
+			return mv;
+		}
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;

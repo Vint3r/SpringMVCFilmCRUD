@@ -15,7 +15,6 @@ public class Film {
 	private String description;
 	@Min (4)
 	private Integer releaseYear;
-	@Size
 	private String language;
 	@Max (3)
 	private Integer rentDuration;

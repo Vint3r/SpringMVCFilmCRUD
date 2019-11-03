@@ -35,6 +35,7 @@
 		<form:radiobutton path="language" value="Mandarin"/>Mandarin
 		<form:radiobutton path="language" value="French"/>French
 		<form:radiobutton path="language" value="German"/></td>
+		<form:errors path="language" />
 		</tr>
 		<tr>
 		<td><form:label path="rentDuration">Rent Duration(Integer):</form:label></td>
@@ -68,6 +69,7 @@
 		<form:radiobutton path="rating" value="PG-13"/>PG-13
 		<form:radiobutton path="rating" value="R"/>R
 		<form:radiobutton path="rating" value="NC-17"/>NC-17</td> 
+		<form:errors path="rating"/>
 		</tr>
 		<tr>
 		<td><form:label path="specialFeat">Special Features(String):</form:label></td>
