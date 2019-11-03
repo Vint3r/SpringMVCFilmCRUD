@@ -222,7 +222,6 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			ps.setDouble(8, film.getReplaceCost());
 			ps.setString(9, film.getRating());
 			ps.setString(10, film.getSpecialFeat());
-			film.setActors(generateActors(film));
 
 			int rowsChanged = ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
@@ -242,6 +241,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			}
 
 			conn.commit();
+			film.setActors(generateActors(film));
 			psLang.close();
 			ps.close();
 			rs.close();
@@ -291,9 +291,9 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			}
 			
 			sql = "INSERT INTO film_actor (film_id, actor_id) values (?, ?)";
-			ps = conn.prepareStatement(sql);
 			
 			for (Actor actor : actorsToBeUsed) {
+				ps = conn.prepareStatement(sql);
 				int actorId = actor.getActorID();
 				ps.setInt(1, filmId);
 				ps.setInt(2, actorId);
