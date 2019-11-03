@@ -86,10 +86,11 @@ public class FilmController {
 //		}
 	}
 	
-	@RequestMapping(path = "update.do", params = {"title", "description", "releaseYear", "language", "rentDuration",
+	@RequestMapping(path = "update.do", params = {"id", "title", "description", "releaseYear", "language", "rentDuration",
 			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category"}, method = RequestMethod.GET)
 	public ModelAndView goToUpdate(Film film) {
 		ModelAndView mv = new ModelAndView();
+		System.out.println(film);
 		dao.updateFilm(film);
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");

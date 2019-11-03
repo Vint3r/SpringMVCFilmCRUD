@@ -100,9 +100,14 @@
 		<form:errors path="releaseYear" value="${film.releaseYear}"/></td>
 		</tr>
 		<tr>
-		<td><form:label path="language" value="${film.language}">Language(String):</form:label></td>
-		<td><form:input path="language" value="${film.language}"/>
-		<form:errors path="language" value="${film.language}"/></td>
+		<td><form:label path="language">Language:</form:label></td>
+		<td><form:radiobutton path="language" value="English"/>English
+		<form:radiobutton path="language" value="Italian"/>Italian
+		<form:radiobutton path="language" value="Japanese"/>Japanese
+		<form:radiobutton path="language" value="Mandarin"/>Mandarin
+		<form:radiobutton path="language" value="French"/>French
+		<form:radiobutton path="language" value="German"/></td>
+		<form:radiobutton path="language" value="${film.language}"/>
 		</tr>
 		<tr>
 		<td><form:label path="rentDuration" value="${film.rentDuration}">Rent Duration(Integer):</form:label></td>
@@ -133,9 +138,9 @@
 		<td><form:label path="rating" value="${film.rating}">Rating:</form:label></td>
 		<td><form:radiobutton path="rating" value="G"/>G
 		<form:radiobutton path="rating" value="PG"/>PG 
-		<form:radiobutton path="rating" value="PG-13"/>PG-13
+		<form:radiobutton path="rating" value="PG-13"/>PG13
 		<form:radiobutton path="rating" value="R"/>R
-		<form:radiobutton path="rating" value="NC-17"/>NC-17</td> 
+		<form:radiobutton path="rating" value="NC-17"/>NC17</td> 
 		</tr>
 		<tr>
 		<td><form:label path="specialFeat" value="${film.specialFeat}">Special Features(String):</form:label></td>

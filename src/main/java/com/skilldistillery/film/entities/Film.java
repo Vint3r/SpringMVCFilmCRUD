@@ -2,6 +2,8 @@ package com.skilldistillery.film.entities;
 
 import java.util.List;
 
+import javax.validation.constraints.Min;
+
 public class Film {
 	private Integer id;
 	private String title;
