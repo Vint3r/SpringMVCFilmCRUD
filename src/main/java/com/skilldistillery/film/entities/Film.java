@@ -15,18 +15,18 @@ public class Film {
 	private String title;
 	@Size (max=255)
 	private String description;
-	@Max (4)
+	@Max (9999)
 	private Integer releaseYear;
 	@NotNull
 	private String language;
-	@Max (3)
+	@Max (999)
 	private Integer rentDuration;
-	@Max (4)
+	@Max (9999)
 	private Double rentRate;
-	@Max (5)
+	@Max (99999)
 	private Integer length;
 	@NotNull
-	@Max (5)
+	@Max (99999)
 	private Double replaceCost;
 	private String rating;
 	private String specialFeat;
