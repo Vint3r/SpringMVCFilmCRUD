@@ -272,7 +272,6 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			ResultSet rs = ps.executeQuery();
-			while(rs.next())
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

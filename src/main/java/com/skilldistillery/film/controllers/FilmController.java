@@ -45,10 +45,10 @@ public class FilmController {
 	public ModelAndView goToSearchById(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		int filmId = film.getId();
-		if (errors.getErrorCount() > 0) {
-			mv.setViewName("WEB-INF/search.jsp");
-			return mv;
-		}
+//		if (errors.getErrorCount() > 1) {
+//			mv.setViewName("WEB-INF/search.jsp");
+//			return mv;
+//		}
 		
 		film = dao.findFilmById(filmId);
 		if (film == null) {
@@ -65,7 +65,7 @@ public class FilmController {
 	public ModelAndView goToSearchByKW(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		String key = film.getKeyword();
-		if (errors.getErrorCount() > 0) {
+		if (errors.getErrorCount() > 1) {
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}

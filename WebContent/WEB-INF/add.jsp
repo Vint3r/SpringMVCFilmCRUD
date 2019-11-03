@@ -66,9 +66,9 @@
 		<td><form:label path="rating">Rating:</form:label></td>
 		<td><form:radiobutton path="rating" value="G"/>G
 		<form:radiobutton path="rating" value="PG"/>PG 
-		<form:radiobutton path="rating" value="PG-13"/>PG-13
+		<form:radiobutton path="rating" value="PG13"/>PG-13
 		<form:radiobutton path="rating" value="R"/>R
-		<form:radiobutton path="rating" value="NC-17"/>NC-17</td> 
+		<form:radiobutton path="rating" value="NC17"/>NC-17</td> 
 		<form:errors path="rating"/>
 		</tr>
 		<tr>

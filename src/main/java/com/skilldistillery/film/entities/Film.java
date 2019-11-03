@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 
 
 public class Film {
-	@NotNull
 	private Integer id;
 	@NotNull
 	@Size (max=255)
@@ -17,7 +16,6 @@ public class Film {
 	@Size (max=255)
 	private String description;
 	@Max (4)
-	@Min (4)
 	private Integer releaseYear;
 	@NotNull
 	private String language;
