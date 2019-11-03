@@ -310,8 +310,27 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 
 	@Override
 	public Film updateFilm(Film film) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "UPDATE film SET title = ?, description = ?, release_year = ?, language_id = ?, rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?, rating = ?, special_features = ? WHERE id = ?";
+		try (Connection conn = DriverManager.getConnection(URL, "student", "student");
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			int filmId = film.getId();
+			stmt.setInt(1, filmId);
+			ResultSet filmResult = stmt.executeQuery();
+			if (filmResult.next()) {
+				film = new Film();
+				film.setTitle(filmResult.getString(1));
+				film.setDescription(filmResult.getString(2));
+				film.setReleaseYear(filmResult.getInt(3));
+				film.setRating(filmResult.getString(4));
+				film.setLanguage(filmResult.getString(5));
+				film.setActors(findActorsByFilmId(filmId));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+			
+		}
+		return film;
 	}
 
 }
