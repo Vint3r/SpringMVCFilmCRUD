@@ -76,7 +76,12 @@ public class FilmController {
 			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category" }, method = RequestMethod.GET)
 	public ModelAndView addFilm(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(film);	
+		System.out.println(film);
+//		if (errors.getErrorCount() > 0) {
+//			mv.setViewName("WEB-INF/add.jsp");
+//			return mv;
+//		}
+		
 		film = dao.createFilm(film);
 		if (film == null) {
 			errors.rejectValue("title", "error.title", "Unable to create movie with the given information, please try again.");
@@ -108,6 +113,7 @@ public class FilmController {
 	public ModelAndView goToUpdate(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
+		
 		film = dao.updateFilm(film);
 		if (film == null) {
 			errors.rejectValue("title", "error.title", "Unable to update film in the data base, please try again");
