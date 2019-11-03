@@ -1,6 +1,5 @@
 package com.skilldistillery.film.DAO;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.skilldistillery.film.entities.Actor;
@@ -16,5 +15,6 @@ public interface DatabaseAccessObjectInterface {
 	  public Film createFilm(Film film);
 	  public boolean deleteFilm(Film film);
 	  public Film updateFilm(Film film);
+	  public List<Actor> generateActors();
 	  
 }

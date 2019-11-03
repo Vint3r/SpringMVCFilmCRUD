@@ -222,6 +222,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			ps.setDouble(8, film.getReplaceCost());
 			ps.setString(9, film.getRating());
 			ps.setString(10, film.getSpecialFeat());
+			film.setActors(generateActors());
 
 			int rowsChanged = ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
@@ -241,7 +242,7 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			}
 
 			conn.commit();
-//			psLang.close();
+			psLang.close();
 			ps.close();
 			rs.close();
 			conn.close();
@@ -261,6 +262,24 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 		}
 	}
 
+	public List<Actor> generateActors() {
+		int actorCount = (int) (Math.random() * 10) + 1;
+		Connection conn = null;
+		
+		try {
+			conn = DriverManager.getConnection(URL, user, password);
+			String sql = "SELECT * from actor";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 	@Override
 	public boolean deleteFilm(Film film) {
 		Connection conn = null;
@@ -269,19 +288,19 @@ public class DatabaseAccessObjectImpl implements DatabaseAccessObjectInterface {
 			conn = DriverManager.getConnection(URL, user, password);
 			conn.setAutoCommit(false);
 
-//			String sql = "DELETE FROM film_actor WHERE film_id = ?";
+			String sql = "DELETE FROM film_actor WHERE film_id = ?";
 			String sql2 = "DELETE FROM film WHERE id = ?";
 			String sql3 = "DELETE FROM film_category WHERE film_id = ?";
 			int filmId = film.getId();
 
-//			PreparedStatement ps = conn.prepareStatement(sql);
-//			ps.setInt(1, filmId);
-//			int rowsChanged = ps.executeUpdate();
-//			System.out.println(rowsChanged + " rows deleted from the Film_Actor data base.");
-//			
-			PreparedStatement ps = conn.prepareStatement(sql3);
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, filmId);
 			int rowsChanged = ps.executeUpdate();
+			System.out.println(rowsChanged + " rows deleted from the Film_Actor data base.");
+			
+			ps = conn.prepareStatement(sql3);
+			ps.setInt(1, filmId);
+			rowsChanged = ps.executeUpdate();
 			System.out.println(rowsChanged + " rows deleted from the Film_category table.");
 
 			ps = conn.prepareStatement(sql2);
