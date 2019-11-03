@@ -2,8 +2,11 @@ package com.skilldistillery.film.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,10 +43,15 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = "searchid.do", params = "id", method = RequestMethod.GET)
-	public ModelAndView goToSearchById(Film film) {
+	public ModelAndView goToSearchById(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		int filmId = film.getId();
 		film = dao.findFilmById(filmId);
+		if (film == null) {
+			errors.rejectValue("film", "error.film", "Unable to delete film from data base");
+			mv.setViewName("WEB-INF/displayfullinfo.jsp");
+			return mv;
+		}
 		mv.addObject("film", film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
@@ -72,10 +80,12 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = "delete.do", params = "id", method = RequestMethod.GET)
-	public ModelAndView deleteFilm(Film film) {
+	public ModelAndView deleteFilm(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
-		if (dao.deleteFilm(film)) {
-			mv.setViewName("index.html");
+		if (!dao.deleteFilm(film)) {
+			errors.rejectValue("film", "error.film", "Unable to delete film from data base");
+			mv.addObject("film", film);
+			mv.setViewName("WEB-INF/displayfullinfo.jsp");
 			return mv;
 		} 
 		mv.setViewName("index.html");

@@ -71,7 +71,7 @@
 				to Home</a> <br>
 			<form:form action="delete.do" method="GET" modelAttribute="film">
 				<form:label path="id" value="${film.id}">ID:</form:label>
-				<form:input path="id" value="${film.id}"/>
+				<form:hidden path="id" value="${film.id}"/>
 				<form:errors path="id" value="${film.id}"/>
 				<input type="submit" value="Delete ID" />
 			</form:form>
