@@ -45,17 +45,20 @@ public class FilmController {
 	public ModelAndView goToSearchById(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		Integer filmId = film.getId();
+
 		if (filmId == null) {
 			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}
+
 		film = dao.findFilmById(filmId);
 		if (film == null) {
 			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}
+
 		mv.addObject("film", film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
@@ -71,7 +74,7 @@ public class FilmController {
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}
-		
+
 		mv.addObject("films", films);
 		mv.setViewName("WEB-INF/displayfullinfolists.jsp");
 		return mv;
@@ -86,14 +89,15 @@ public class FilmController {
 			mv.setViewName("WEB-INF/add.jsp");
 			return mv;
 		}
-		
+
 		film = dao.createFilm(film);
 		if (film == null) {
-			errors.rejectValue("title", "error.title", "Unable to create movie with the given information, please try again.");
+			errors.rejectValue("title", "error.title",
+					"Unable to create movie with the given information, please try again.");
 			mv.setViewName("WEB-INF/add.jsp");
 			return mv;
 		}
-		
+
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
@@ -108,24 +112,25 @@ public class FilmController {
 			mv.addObject("film", film);
 			mv.setViewName("WEB-INF/displayfullinfo.jsp");
 			return mv;
-		} 
+		}
 		mv.setViewName("index.html");
 		return mv;
 	}
-	
-	@RequestMapping(path = "update.do", params = {"id", "title", "description", "releaseYear", "language", "rentDuration",
-			"rentRate", "length", "replaceCost", "rating", "specialFeat", "category"}, method = RequestMethod.GET)
+
+	@RequestMapping(path = "update.do", params = { "id", "title", "description", "releaseYear", "language",
+			"rentDuration", "rentRate", "length", "replaceCost", "rating", "specialFeat",
+			"category" }, method = RequestMethod.GET)
 	public ModelAndView goToUpdate(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
-		
+
 		dao.updateFilm(film);
 		if (film == null) {
 			errors.rejectValue("title", "error.title", "Unable to update film in the data base, please try again");
 			mv.setViewName("WEB-INF/displayfullinfo.jsp");
 			return mv;
 		}
-		
+
 		mv.addObject(film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;

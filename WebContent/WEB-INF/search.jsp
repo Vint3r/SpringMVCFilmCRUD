@@ -18,11 +18,13 @@
 		<br />
 			<form:form action="searchid.do" method="GET" modelAttribute="film">
 		<form:label path="id">ID:</form:label>
-		<form:input path="id" />
+		<form:input type="number" path="id" />
 		<form:errors path="id" />
 		<input type="submit" value="Search Id" />
 	</form:form>
-	<a href="index.html" class="btn btn-secondary" role="button">Back to Home</a>
+	<br>
+	<br>
+	<a style= "color:blue" href="index.html" class="btn btn-secondary" role="button">Back to Home</a>
 	<br />
 </body>
 </html>

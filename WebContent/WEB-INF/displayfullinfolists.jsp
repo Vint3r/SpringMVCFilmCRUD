@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Films</title>
 </head>
-<body>
+<body >
 	<c:forEach var="film" items="${films}">
 		<h1>${film.title}</h1>
 		<table>
@@ -75,10 +75,10 @@
 			</table>
 	<br>
 	<form:form action="delete.do" method="GET" modelAttribute="film">
-		<form:label path="id">ID:</form:label>
+		<form:label path="id">Delete: ${film.title }</form:label>
 		<form:hidden path="id" />
 		<form:errors path="id" />
-		<input type="submit" value="Delete ID" />
+		<input type="submit" value="Delete Film" />
 	</form:form>
 	<form:form action="update.do" method="GET" modelAttribute="film">
 	<div>
@@ -128,7 +128,7 @@
 		<form:errors path="replaceCost" value="${film.replaceCost}"/></td>
 		</tr>
 		<tr>
-		<td><form:label path="category">Category:</form:label></td>
+		<td><form:label path="category" value="${film.category}">Category:</form:label></td>
 		<td><form:select path="category">Category
 		<option value="Action">Action</option>
 		<option value="Animation">Animation</option>
@@ -164,7 +164,7 @@
 		<form:errors path="specialFeat" value="${film.specialFeat}"/></td>
 		</tr>
 		<tr>
-		<td><input type="submit" value="Update Film" /></td>
+		<td><input type="submit" value="Update Film" />Update: ${film.title }</td>
 		</tr>
 		</table>
 		<br>
