@@ -1,4 +1,5 @@
 ## Spring MVC Film C.R.U.D. Project
+### Team Members: David Norris & Adam Onwan
 
 ### Overview
 
