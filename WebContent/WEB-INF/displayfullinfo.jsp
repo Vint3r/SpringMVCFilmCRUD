@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Films</title>
 </head>
-<body>
+<body >
 	<h1>${film.title}</h1>
 	<table>
 		<tr>
@@ -68,17 +68,16 @@
 
 		</table>
 			<form:form action="delete.do" method="GET" modelAttribute="film">
-				<form:label path="id" value="${film.id}">ID:</form:label>
+				<form:label path="id" value="${film.id}"></form:label>
 				<form:hidden path="id" value="${film.id}"/>
 				<form:errors path="id" value="${film.id}"/>
-				<input type="submit" value="Delete ID" />
+				<input type="submit" value="Delete Film" />
 			</form:form>
-			<form:form action="update.do" method="GET" modelAttribute="film">
+		<form:form action="update.do" method="GET" modelAttribute="film">
 <table><tr>
 		<td><form:label path="title" value="${film.title}">Title(String):</form:label></td>
 		<td><form:input path="title" value="${film.title}"/>
 		<form:errors path="title" value="${film.title}" /></td>
-		<br />
 		</tr>
 		<tr>
 		<td><form:label path="id" value="${film.id}"></form:label>
@@ -125,7 +124,7 @@
 		<form:errors path="replaceCost" value="${film.replaceCost}"/></td>
 		</tr>
 		<tr>
-		<td><form:label path="category">Category:</form:label></td>
+		<td><form:label path="category" value="${film.category}">Category:</form:label></td>
 		<td><form:select path="category">Category
 		<option value="Action">Action</option>
 		<option value="Animation">Animation</option>
@@ -161,7 +160,7 @@
 		<form:errors path="specialFeat" value="${film.specialFeat}"/></td>
 		</tr>
 		<tr>
-		<td><input type="submit" value="Update Film" /></td>
+		<td><input type="submit" value="Update Film" />Update: ${film.title }</td>
 		</tr>
 		</table>
 		<br>
