@@ -44,13 +44,13 @@ public class FilmController {
 	@RequestMapping(path = "searchid.do", params = "id", method = RequestMethod.GET)
 	public ModelAndView goToSearchById(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
-		int filmId = film.getId();
-		film = dao.findFilmById(filmId);
-		if (film == null) {
+		Integer filmId = film.getId();
+		if (film == null || filmId == null) {
 			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
 		}
+		film = dao.findFilmById(filmId);
 		mv.addObject("film", film);
 		mv.setViewName("WEB-INF/displayfullinfo.jsp");
 		return mv;
