@@ -125,9 +125,26 @@
 		<form:errors path="replaceCost" value="${film.replaceCost}"/></td>
 		</tr>
 		<tr>
-		<td><form:label path="category" value="${film.category}">category(String):</form:label></td>
-		<td><form:input path="category" value="${film.category}"/>
-		<form:errors path="category" value="${film.category}"/></td>
+		<td><form:label path="category">Category:</form:label></td>
+		<td><form:select path="category">Category
+		<option value="Action">Action</option>
+		<option value="Animation">Animation</option>
+		<option value="Children">Children</option>
+		<option value="Classics">Classics</option>
+		<option value="Comedy">Comedy</option>
+		<option value="Documentary">Documentary</option>
+		<option value="Drama">Drama</option>
+		<option value="Family">Family</option>
+		<option value="Foreign">Foreign</option>
+		<option value="Games">Games</option>
+		<option value="Horror">Horror</option>
+		<option value="Music">Music</option>
+		<option value="New">New</option>
+		<option value="Sci-Fi">Sci-Fi</option>
+		<option value="Sports">Sports</option>
+		<option value="Travel">Travel</option>
+		</form:select></td>
+		<form:errors path="category" value="Action"/>
 		</tr>
 		<tr>
 		<td><form:label path="rating" value="${film.rating}">Rating:</form:label></td>
