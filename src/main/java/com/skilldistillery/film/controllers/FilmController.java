@@ -46,7 +46,7 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		Integer filmId = film.getId();
 		film = dao.findFilmById(filmId);
-		if (film == null) {
+		if (film == null || filmId == null) {
 			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
