@@ -53,7 +53,7 @@ public class FilmController {
 		}
 
 		film = dao.findFilmById(filmId);
-		if (film == null) {
+		if (film == null || filmId == null) {
 			errors.rejectValue("id", "error.id", "Unable to locate film " + filmId + " in data base");
 			mv.setViewName("WEB-INF/search.jsp");
 			return mv;
