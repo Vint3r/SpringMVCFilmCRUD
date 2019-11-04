@@ -99,7 +99,7 @@ public class FilmController {
 	public ModelAndView deleteFilm(@Valid Film film, Errors errors) {
 		ModelAndView mv = new ModelAndView();
 		if (!dao.deleteFilm(film)) {
-			errors.rejectValue("id", "error.id", "Unable to delete film from data base");
+			errors.rejectValue("film", "error.film", "Unable to delete film from data base");
 			mv.addObject("film", film);
 			mv.setViewName("WEB-INF/displayfullinfo.jsp");
 			return mv;
