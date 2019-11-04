@@ -13,7 +13,6 @@ public class Film {
 	@NotNull
 	@Size (min= 1, max=255)
 	private String title;
-	@Min (1)
 	@Size (min=1, max=255)
 	private String description;
 	@Min (1)

@@ -60,7 +60,7 @@
 		<tr>
 		<td><form:label path="category" value="Action">category(String):</form:label></td>
 		<td><form:input path="category" value="Action"/>
-		<form:errors path="category" value="Action"/></td>
+		<form:errors path="category" value="Action"/>
 		</tr>
 		<tr>
 		<td><form:label path="rating" value="G">Rating:</form:label></td>
