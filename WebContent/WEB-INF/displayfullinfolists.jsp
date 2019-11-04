@@ -74,7 +74,7 @@
 
 			</table>
 	<br>
-	<form:form action="delete.do" method="GET" modelAttribute="film">
+	<form:form action="delete.do" method="GET" modelAttribute="id">
 		<form:label path="id">Delete: ${film.title }</form:label>
 		<form:hidden path="id" />
 		<form:errors path="id" />
