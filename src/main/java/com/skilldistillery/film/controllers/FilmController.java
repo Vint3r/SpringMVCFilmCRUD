@@ -114,7 +114,7 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(film);
 		
-		film = dao.updateFilm(film);
+		dao.updateFilm(film);
 		if (film == null) {
 			errors.rejectValue("title", "error.title", "Unable to update film in the data base, please try again");
 			mv.setViewName("WEB-INF/displayfullinfo.jsp");
