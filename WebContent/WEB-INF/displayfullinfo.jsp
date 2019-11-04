@@ -67,7 +67,7 @@
 			</c:forEach>
 
 		</table>
-			<form:form action="delete.do" method="GET" modelAttribute="id">
+			<form:form action="delete.do" method="GET" modelAttribute="film">
 				<form:label path="id" value="${film.id}"></form:label>
 				<form:hidden path="id" value="${film.id}"/>
 				<form:errors path="id" value="${film.id}"/>
